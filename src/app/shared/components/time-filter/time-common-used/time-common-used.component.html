@@ -1,0 +1,12 @@
+<span class="font-weight-bold p-2 cursor-pointer">
+      <span class="svg-icon"
+            inlineSVG="assets/media/svg/icons/Code/Time-schedule.svg"></span>
+          Commonly used
+    </span>
+<div class="d-flex justify-content-start align-items-center flex-wrap pr-2 pl-2 pb-3
+    border-bottom-1 border-grey-100" id="commonlyUsed">
+  <div *ngFor="let common of commonlyUsed" class="text-primary w-50 py-1">
+        <span (click)="commonChange.emit(common)"
+              class="cursor-pointer label-time">{{common.label}}</span>
+  </div>
+</div>

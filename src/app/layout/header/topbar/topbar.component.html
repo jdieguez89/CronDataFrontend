@@ -1,0 +1,53 @@
+<!-- begin:: Header Topbar -->
+<ng-container>
+  <!--  <ng-container *ngIf="searchDisplay">-->
+  <!--    &lt;!&ndash;begin: Search &ndash;&gt;-->
+  <!--    <app-search-dropdown [icon]="'./assets/media/svg/icons/General/Search.svg'" [useSVG]="true"></app-search-dropdown>-->
+  <!--    &lt;!&ndash;end: Search &ndash;&gt;-->
+  <!--  </ng-container>-->
+
+  <!--  <ng-container *ngIf="notificationsDisplay">-->
+  <!--    &lt;!&ndash;begin: Notifications &ndash;&gt;-->
+  <!--    <app-notification [bgImage]="'./assets/media/misc/bg-1.jpg'" [pulse]="true" [skin]="'dark'"-->
+  <!--                      [icon]="'assets/media/svg/icons/General/Notifications1.svg'" [useSVG]="true"></app-notification>-->
+  <!--end: Notifications -->
+</ng-container>
+
+<!--  <ng-container *ngIf="quickActionsDisplay">-->
+<!--    &lt;!&ndash;begin: Quick actions &ndash;&gt;-->
+<!--    <app-quick-action [bgImage]="'./assets/media/misc/bg-2.jpg'" [skin]="'dark'"-->
+<!--                      [icon]="'./assets/media/svg/icons/Layout/Layout-4-blocks.svg'"-->
+<!--                      [useSVG]="true"></app-quick-action>-->
+<!--    &lt;!&ndash;end: Quick actions &ndash;&gt;-->
+<!--  </ng-container>-->
+
+<!--  <ng-container *ngIf="quickPanelDisplay">-->
+<!--    &lt;!&ndash;begin: Quick panel toggle &ndash;&gt;-->
+<!--    <div class="topbar-item" ngbTooltip="Quick panel">-->
+<!--      <div class="btn btn-icon btn-clean btn-lg mr-1" id="kt_quick_panel_toggle">-->
+<!--        <span class="svg-icon svg-icon-xl svg-icon-white"-->
+<!--              [inlineSVG]="'./assets/media/svg/icons/Layout/Layout-4-blocks.svg'"></span>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;end: Quick panel toggle &ndash;&gt;-->
+<!--  </ng-container>-->
+
+<!--  <ng-container *ngIf="languagesDisplay">-->
+<!--    &lt;!&ndash;begin: Language bar &ndash;&gt;-->
+<!--    <app-language-selector></app-language-selector>-->
+<!--    &lt;!&ndash;end: Language bar &ndash;&gt;-->
+<!--  </ng-container>-->
+
+<ng-container *ngIf="userDisplay">
+  <ng-container *ngIf="userLayout === 'dropdown'">
+    <app-top-user-profile [userDropdownStyle]="userDropdownStyle">
+    </app-top-user-profile>
+  </ng-container>
+  <ng-container *ngIf="userLayout === 'offcanvas'">
+    <!--begin: User bar -->
+    <app-user-profile4></app-user-profile4>
+    <!--end: User bar -->
+  </ng-container>
+</ng-container>
+<!--</ng-container>-->
+<!-- end:: Header Topbar -->

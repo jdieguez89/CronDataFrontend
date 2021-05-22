@@ -1,0 +1,198 @@
+<!--&lt;!&ndash; BEGIN: Left Aside &ndash;&gt;-->
+<!--<div #asideMenuOffcanvas class="aside aside-left d-flex flex-column flex-row-auto"-->
+<!--     [ngClass]="asideClasses"-->
+<!--     id="kt_aside">-->
+<!--  &lt;!&ndash; begin:: Brand &ndash;&gt;-->
+<!--  <app-brand></app-brand>-->
+<!--  &lt;!&ndash; end:: Brand &ndash;&gt;-->
+
+<!--  &lt;!&ndash; BEGIN: Aside Menu &ndash;&gt;-->
+<!--  <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">-->
+<!--    <div #asideMenu appMenu [options]="menuOptions"-->
+<!--         [perfectScrollbar]="{wheelPropagation: false, suppressScrollX: false}"-->
+<!--         [ngStyle]="{'max-height': '100vh', 'position': 'relative'}" id="kt_aside_menu"-->
+<!--         class="aside-menu scroll"-->
+<!--         (mouseenter)="mouseEnter($event)" (mouseleave)="mouseLeave($event)"-->
+<!--         [ngClass]="htmlClassService.getClasses('aside_menu', true)">-->
+<!--      <ul class="menu-nav" [ngClass]="htmlClassService.getClasses('aside_menu_nav', true)">-->
+<!--        <ng-container [ngTemplateOutlet]="menuListTemplate"></ng-container>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  &lt;!&ndash; END: Aside Menu &ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash; END: Left Aside &ndash;&gt;-->
+
+<!--<ng-template #menuListTemplate>-->
+<!--  <ng-container *ngFor="let child of menuAsideService.menuList$ | async">-->
+<!--    <ng-container *ngIf="child.section" [ngTemplateOutlet]="menuItemSectionTemplate"-->
+<!--                  [ngTemplateOutletContext]="{ item: child }"></ng-container>-->
+<!--    <ng-container *ngIf="child.separator" [ngTemplateOutlet]="menuItemSeparatorTemplate"-->
+<!--                  [ngTemplateOutletContext]="{ item: child }"></ng-container>-->
+<!--    <ng-container *ngIf="child.title" [ngTemplateOutlet]="menuItemTemplate"-->
+<!--                  [ngTemplateOutletContext]="{ item: child }"></ng-container>-->
+<!--  </ng-container>-->
+<!--</ng-template>-->
+
+<!--<ng-template #menuItemTemplate let-item="item" let-parentItem="parentItem">-->
+<!--  <ng-container *ngIf="!item.permission" [ngTemplateOutlet]="menuItemInnerTemplate"-->
+<!--                [ngTemplateOutletContext]="{ item: item, parentItem: parentItem}"></ng-container>-->
+<!--  <ng-template *ngIf="item.permission">-->
+<!--    <ng-container [ngTemplateOutlet]="menuItemInnerTemplate"-->
+<!--                  [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>-->
+<!--  </ng-template>-->
+<!--</ng-template>-->
+
+<!--<ng-template #menuItemInnerTemplate let-item="item" let-parentItem="parentItem">-->
+<!--  <li [attr.aria-haspopup]="true"-->
+<!--      [attr.data-menu-toggle]="getItemAttrSubmenuToggle(item)"-->
+<!--      [attr.data-ktmenu-submenu-mode]="item.mode"-->
+<!--      *appHasAnyAuthority="item.authorities"-->
+<!--      [attr.data-ktmenu-dropdown-toggle-class]="item['dropdown-toggle-class']" [ngClass]="getItemCssClasses(item)"-->
+<!--      [ngbTooltip]="item.tooltip" data-placement="right">-->
+
+<!--    &lt;!&ndash; if menu item hasn't submenu &ndash;&gt;-->
+<!--    <a *ngIf="!item.submenu" [routerLink]="item.page" class="menu-link menu-toggle">-->
+<!--      <ng-container [ngTemplateOutlet]="menuItemTextTemplate"-->
+<!--                    *appHasAnyAuthority="item.authorities"-->
+<!--                    [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>-->
+<!--    </a>-->
+<!--    &lt;!&ndash; if menu item has sumnenu child  &ndash;&gt;-->
+<!--    <a *ngIf="item.submenu" class="menu-link menu-toggle">-->
+<!--      <ng-container [ngTemplateOutlet]="menuItemTextTemplate"-->
+<!--                    *appHasAnyAuthority="item.authorities"-->
+<!--                    [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>-->
+<!--    </a>-->
+
+<!--    &lt;!&ndash; if menu item has submenu child then recursively call new menu item component &ndash;&gt;-->
+<!--    <div *ngIf="item.submenu" class="menu-submenu">-->
+<!--      <span class="menu-arrow"></span>-->
+<!--      <div *ngIf="item['custom-class'] === 'menu-item&#45;&#45;submenu-fullheight'" class="menu-wrapper">-->
+<!--        &lt;!&ndash; wrap submenu to full height &ndash;&gt;-->
+<!--        <ng-container [ngTemplateOutlet]="menuSubmenuTemplate"-->
+<!--                      [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; normal submenu &ndash;&gt;-->
+<!--      <ng-container *ngIf="item['custom-class'] !== 'menu-item&#45;&#45;submenu-fullheight'"-->
+<!--                    [ngTemplateOutlet]="menuSubmenuTemplate"-->
+<!--                    [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }">-->
+<!--      </ng-container>-->
+<!--    </div>-->
+<!--  </li>-->
+
+<!--</ng-template>-->
+
+<!--<ng-template #menuSubmenuTemplate let-item="item" let-parentItem="parentItem">-->
+<!--  <ul class="menu-subnav">-->
+<!--    <ng-container *ngFor="let child of item.submenu">-->
+<!--      <ng-container *ngIf="child.section" [ngTemplateOutlet]="menuItemSectionTemplate"-->
+<!--                    [ngTemplateOutletContext]="{ item: child, parentItem: item }"></ng-container>-->
+<!--      <ng-container *ngIf="child.separator" [ngTemplateOutlet]="menuItemSeparatorTemplate"-->
+<!--                    [ngTemplateOutletContext]="{ item: child, parentItem: item }"></ng-container>-->
+<!--      <ng-container *ngIf="child.title" [ngTemplateOutlet]="menuItemTemplate"-->
+<!--                    [ngTemplateOutletContext]="{ item: child, parentItem: item }"></ng-container>-->
+<!--    </ng-container>-->
+<!--  </ul>-->
+<!--</ng-template>-->
+
+<!--<ng-template #menuItemTextTemplate let-item="item" let-parentItem="parentItem">-->
+<!--  &lt;!&ndash; if menu item has icon &ndash;&gt;-->
+<!--  <i *ngIf="item.icon" class="menu-icon" [ngClass]="item.icon"></i>-->
+
+<!--  &lt;!&ndash; if menu item using bullet &ndash;&gt;-->
+<!--  <i *ngIf="parentItem && parentItem.bullet === 'dot'" class="menu-bullet menu-bullet-dot">-->
+<!--    <span></span>-->
+<!--  </i>-->
+<!--  <i *ngIf="parentItem && parentItem.bullet === 'line'" class="menu-bullet menu-bullet-line">-->
+<!--    <span></span>-->
+<!--  </i>-->
+
+<!--  &lt;!&ndash; menu item title text &ndash;&gt;-->
+<!--  <span class="menu-text" [translate]="item.translate">{{item.title}}</span>-->
+<!--  &lt;!&ndash; menu item with badge &ndash;&gt;-->
+<!--  <span *ngIf="item.badge" class="menu-badge">-->
+<!--		<span class="badge" [ngClass]="item.badge.type">{{item.badge.value}}</span>-->
+<!--	</span>-->
+
+<!--  &lt;!&ndash; if menu item has submenu child then put arrow icon &ndash;&gt;-->
+<!--  <i *ngIf="item.submenu" class="menu-arrow"></i>-->
+<!--</ng-template>-->
+
+<!--<ng-template #menuItemSeparatorTemplate let-item="item" let-parentItem="parentItem">-->
+<!--  <li class="menu-separator"><span></span></li>-->
+<!--</ng-template>-->
+
+<!--<ng-template #menuItemSectionTemplate let-item="item" let-parentItem="parentItem">-->
+<!--  <li class="menu-section">-->
+<!--    <h4 class="menu-text" [translate]="item.translate">{{item.section}}</h4>-->
+<!--    <i class="menu-icon flaticon-more-v2"></i>-->
+<!--  </li>-->
+<!--</ng-template>-->
+
+<div #asideMenuOffcanvas class="aside aside-left d-flex flex-column flex-row-auto bg-white"
+     [ngClass]="asideClasses"
+     id="kt_aside">
+  <!--begin::Brand-->
+  <div class="aside-brand d-flex flex-column align-items-center flex-column-auto">
+    <!--begin::Logo-->
+    <app-brand></app-brand>
+    <!--end::Logo-->
+  </div>
+  <!--end::Brand-->
+  <!--begin::Nav Wrapper-->
+  <div class="aside-nav d-flex flex-column align-items-center flex-column-fluid pb-10 scroll ps ps--active-y"
+       style="height: 233px; overflow: hidden;">
+    <!--begin::Nav-->
+    <ul class="nav flex-column">
+      <!--begin::Item-->
+      <li class="nav-item mb-2" [ngbTooltip]="'app.home'|translate" placement="right" container="body">
+        <a class="nav-link btn btn-icon btn-hover-text-primary btn-lg"
+           routerLink="/app/crondata/features" routerLinkActive="active">
+					<span class="svg-icon svg-icon-xxl" inlineSVG="assets/media/svg/icons/Layout/Layout-4-blocks.svg">
+					</span>
+        </a>
+      </li>
+
+      <li class="nav-item mb-2" [ngbTooltip]="'app.assets.dashboard.title'|translate"
+          placement="right"
+          container="body">
+        <a class="nav-link btn btn-icon btn-hover-text-primary btn-lg"
+           routerLink="/app/crondata/assets-discovery/dashboard"
+           routerLinkActive="active">
+					<span class="svg-icon svg-icon-xxl"
+                inlineSVG="assets/media/svg/icons/Shopping/Chart-pie.svg">
+					</span>
+        </a>
+      </li>
+
+      <li class="nav-item mb-2" [ngbTooltip]="'app.assets.discover.title'|translate"
+          placement="right" container="body">
+        <a class="nav-link btn btn-icon btn-hover-text-primary btn-lg"
+           routerLink="/app/crondata/assets-discovery/assets" routerLinkActive="active">
+					<span class="svg-icon svg-icon-xxl" inlineSVG="assets/media/svg/icons/Devices/Router2.svg">
+					</span>
+        </a>
+      </li>
+
+      <li class="nav-item mb-2" [ngbTooltip]="'app.scanConfig.task.title'|translate"
+          placement="right" container="body">
+        <a class="nav-link btn btn-icon btn-hover-text-primary btn-lg"
+           routerLink="/app/crondata/scanner/scan" routerLinkActive="active">
+					<span class="svg-icon svg-icon-xxl" inlineSVG="assets/media/svg/icons/Text/Align-justify.svg">
+					</span>
+        </a>
+      </li>
+
+      <li class="nav-item mb-2" [ngbTooltip]="'app.scanConfig.task.title'|translate"
+          placement="right" container="body">
+        <a class="nav-link btn btn-icon btn-hover-text-primary btn-lg"
+           routerLink="/app/crondata/scanner/config/target" routerLinkActive="active">
+					<span class="svg-icon svg-icon-xxl" inlineSVG="assets/media/svg/icons/Code/Settings4.svg">
+					</span>
+        </a>
+      </li>
+      <!--end::Item-->
+    </ul>
+  </div>
+  <!--end::Footer-->
+</div>

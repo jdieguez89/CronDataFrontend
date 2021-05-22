@@ -1,0 +1,14 @@
+<app-modal-header [name]="header"></app-modal-header>
+<div class="container-fluid p-3">
+  <label class="font-weight-light modal-message">{{message}}</label>
+  <div class="d-flex justify-content-end mt-3">
+    <button (click)="cancel()" class="btn btn btn-light-primary mr-3">
+      <i class="flaticon-close"></i>
+      Cancel
+    </button>
+    <button (click)="confirm()" [ngClass]="confirmBtnType" class="btn btn-primary">
+      <i [ngClass]="confirmBtnIcon" class="flaticon-delete"></i>
+      {{confirmBtnText}}
+    </button>
+  </div>
+</div>

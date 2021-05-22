@@ -1,0 +1,12 @@
+<div (click)="fileInput.click()" (onFileDropped)="uploadFile($event)"
+     appUtmFileDragDrop
+     class="w-100 uploadfilecontainer dropzone dropzone-default dropzone-primary dz-clickable d-inline-flex justify-content-center align-items-center">
+  <span inlineSVG="./assets/media/svg/icons/Files/Cloud-upload.svg" class="svg-icon svg-icon-4x"></span>
+  <h6 class="font-weight-light text-blue-800" *ngIf="!file">Drag file or click here to select</h6>
+  <h6 class="font-weight-light text-blue-800" *ngIf="file">{{file.name}} <i
+    class="font-size-sm ml-4 flaticon2-delete cursor-pointer zindex-2" (click)="deleteAttachment()"></i></h6>
+
+  <input #fileInput (change)="uploadFile($event)" [accept]="acceptTypes" [multiple]="false"
+         hidden
+         type="file">
+</div>

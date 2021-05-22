@@ -1,0 +1,31 @@
+<div class="w-100 h-100 p-2">
+  <h6 class="font-weight-thin text-primary mb-3">Application memory usage</h6>
+
+  <div *ngIf="!loading">
+    <div *ngFor="let entry of (jvm | keys)" class="mt-2">
+                <span *ngIf="entry.value.max != -1; else other">
+                    <span>{{ entry.key }}</span>
+                  ({{ entry.value.used / 1048576 | number: '1.0-0' }}M /
+                  {{ entry.value.max / 1048576 | number: '1.0-0' }}M)
+                </span>
+      <span>Committed : {{ entry.value.committed / 1048576 | number: '1.0-0' }}M</span>
+      <ng-template #other><span>
+        <span>{{ entry.key }}
+        </span> {{ entry.value.used / 1048576 | number: '1.0-0' }}M</span>
+      </ng-template>
+
+      <ngb-progressbar
+        *ngIf="entry.value.max != -1"
+        [animated]="true"
+        [striped]="false"
+        [value]="(100 * entry.value.used) / entry.value.max"
+        height="3px"
+        type="success">
+      </ngb-progressbar>
+      <div class="d-flex justify-content-center align-items-center">
+        <span>{{ (entry.value.used * 100) / entry.value.max | number: '1.0-0' }}%</span>
+      </div>
+
+    </div>
+  </div>
+</div>

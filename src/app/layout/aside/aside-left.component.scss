@@ -1,0 +1,32 @@
+:host {
+  .aside {
+    height: 100%;
+
+    .aside-menu {
+      margin: 0;
+    }
+  }
+
+  // fixed text line break issue on minimized aside hover
+  .menu-text {
+    white-space: nowrap;
+  }
+}
+
+.active {
+  .svg-icon {
+    svg {
+      transition: fill 0.3s ease;
+      fill: #3699FF !important
+    }
+  }
+}
+
+.svg-icon {
+  svg {
+    &:hover {
+      transition: fill 0.3s ease;
+      fill: #3699FF !important
+    }
+  }
+}

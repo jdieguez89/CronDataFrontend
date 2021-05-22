@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between align-items-center my-4">
+  <h4 class="text-dark font-weight-bold my-1">
+    Application logs
+  </h4>
+</div>
+<div class="card w-100 h-100">
+  <div class="card-body">
+    <div class="table-responsive" *ngIf="loggers">
+      <p>There are {{ loggers.length }} loggers.</p>
+
+      <table class="table table-striped" aria-describedby="logs-page-heading">
+        <thead>
+        <tr title="click to order">
+          <th scope="col" (click)="orderProp = 'name'; reverse=!reverse"><span>Name</span>
+          </th>
+          <th scope="col" (click)="orderProp = 'level'; reverse=!reverse"><span>Level</span>
+          </th>
+        </tr>
+        </thead>
+
+        <tr *ngFor="let logger of loggers ">
+          <td><small>{{ logger.name | slice:0:140 }}</small></td>
+          <td>
+            <button (click)="changeLevel(logger.name, 'TRACE')"
+                    [ngClass]="(logger.level=='TRACE') ? 'btn-primary' : 'btn-light'" class="btn btn-sm">TRACE
+            </button>
+            <button (click)="changeLevel(logger.name, 'DEBUG')"
+                    [ngClass]="(logger.level=='DEBUG') ? 'btn-success' : 'btn-light'" class="btn btn-sm">DEBUG
+            </button>
+            <button (click)="changeLevel(logger.name, 'INFO')"
+                    [ngClass]="(logger.level=='INFO') ? 'btn-info' : 'btn-light'"
+                    class="btn btn-sm">INFO
+            </button>
+            <button (click)="changeLevel(logger.name, 'WARN')"
+                    [ngClass]="(logger.level=='WARN') ? 'btn-warning' : 'btn-light'" class="btn btn-sm">WARN
+            </button>
+            <button (click)="changeLevel(logger.name, 'ERROR')"
+                    [ngClass]="(logger.level=='ERROR') ? 'btn-danger' : 'btn-light'" class="btn btn-sm">ERROR
+            </button>
+            <button (click)="changeLevel(logger.name, 'OFF')"
+                    [ngClass]="(logger.level=='OFF') ? 'btn-secondary' : 'btn-light'" class="btn btn-sm">OFF
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="!loggers" class="p-5 d-flex justify-content-center align-items-center" style="height:600px">
+      <app-sys-spinner [height]="'35px'" [loading]="!loggers"
+                       [width]="'35px'" label="Loading loggers"></app-sys-spinner>
+    </div>
+  </div>
+</div>
+

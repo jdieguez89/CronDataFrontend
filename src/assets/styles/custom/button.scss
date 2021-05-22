@@ -1,0 +1,54 @@
+@import "../theme";
+
+.utm-button {
+  position: relative;
+  color: #ffffff;
+  font-size: .75rem !important;
+  border: none;
+  border-radius: 0;
+  transition: box-shadow 200ms cubic-bezier(.2, 0, .7, 1), transform 300ms cubic-bezier(.2, 0, .7, 1);
+
+  i {
+    font-size: .75rem !important;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.utm-button-primary {
+  background: $primary-color;
+
+  &:hover {
+    //transform: rotate(45deg);
+    color: #ffffff;
+    box-shadow: 0 0 1px 2px rgba($primary-color, 0.4),
+    0 0 1px 5px rgba($primary-color, 0.1),
+    0 0 1px 8px rgba($primary-color, 0.1);
+  }
+}
+
+.utm-button-grey {
+  background: $grey-color;
+
+  &:hover {
+    //transform: rotate(45deg);
+    color: #ffffff;
+    box-shadow: 0 0 1px 2px rgba($grey-color, 0.4),
+    0 0 1px 5px rgba($grey-color, 0.1),
+    0 0 1px 8px rgba($grey-color, 0.1);
+  }
+}
+
+.utm-button-danger {
+  background: $danger-color;
+
+  &:hover {
+    //transform: rotate(45deg);
+    color: #ffffff;
+    box-shadow: 0 0 1px 2px rgba($danger-color, 0.4),
+    0 0 1px 5px rgba($danger-color, 0.1),
+    0 0 1px 8px rgba($danger-color, 0.1);
+  }
+}

@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between align-items-center my-4">
+  <h4 class="text-dark font-weight-bold my-1">
+    Application metrics
+  </h4>
+  <button (click)="refresh()"
+          class="btn btn-primary">
+    <i class="flaticon2-reload mr-2"></i> Refresh
+  </button>
+</div>
+<div class="card w-100 h-100">
+  <div class="card-body">
+    <div *ngIf="!updatingMetrics" class="row m-0">
+      <div class="col-lg-4 col-md-12 col-sm-12 pl-0">
+        <app-utm-jvm-metrics [jvm]="metrics['jvm']" [loading]="updatingMetrics">
+        </app-utm-jvm-metrics>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12">
+        <app-utm-thread-metrics *ngIf="threadData" [threadData]="threadData">
+        </app-utm-thread-metrics>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 pr-0">
+        <app-utm-system-metrics [systemMetrics]="metrics['processMetrics']"
+                                [updating]="updatingMetrics">
+        </app-utm-system-metrics>
+      </div>
+    </div>
+    <div *ngIf="updatingMetrics" class="p-5">
+      <app-sys-spinner [height]="'35px'" [loading]="updatingMetrics"
+                       [width]="'35px'" label="Loading metrics"></app-sys-spinner>
+    </div>
+  </div>
+</div>

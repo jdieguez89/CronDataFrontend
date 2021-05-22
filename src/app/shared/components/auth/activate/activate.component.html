@@ -1,0 +1,45 @@
+<div class="d-flex flex-column flex-root flex-center">
+  <div class="d-flex flex-center flex-row-fluid w-100">
+    <div class="login-form text-center p-7 position-relative overflow-hidden">
+      <!--begin::Login Header-->
+      <div class="d-flex flex-center mb-15">
+        <a href="#">
+          <img src="/assets/media/logos/logo-letter-13.png" class="max-h-75px" alt=""/>
+        </a>
+      </div>
+      <!--end::Login Header-->
+      <!--begin::Login Sign in form-->
+      <div class="login-signin">
+        <div class="mb-10 text-center">
+          <h2>Activate account</h2>
+          <div class="text-muted font-weight-bold">Will verify your email trough this process</div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center w-100 mb-5 flex-column">
+          <span class="svg-icon svg-icon-6x" *ngIf="!checking"
+                [ngClass]="success?'svg-icon-success':'svg-icon-danger'"
+                [inlineSVG]="success?'assets/media/svg/icons/Code/Done-circle.svg':
+                'assets/media/svg/icons/Code/Warning-1-circle.svg'">
+          </span>
+          <h6 *ngIf="success">Redirecting to login in {{going}}</h6>
+          <app-sys-spinner *ngIf="checking" [loading]="checking" label="Verifying activation code"></app-sys-spinner>
+        </div>
+        <app-sys-alert type="success" *ngIf="success && !checking"
+                       alert="Your user account has been activated."></app-sys-alert>
+
+        <app-sys-alert
+          alert="<strong>Your user could not be activated.</strong> Please use the registration form to
+           sign up, or contact us for more information"
+          type="danger" *ngIf="!success && !checking"></app-sys-alert>
+
+        <div class="top-forgot mt-10 text-center d-flex justify-content-center pb-lg-0 pb-10"
+             *ngIf="success">
+          <span class="font-weight-bold text-muted font-size-h4">Sign in to your account</span>
+          <a routerLink="/auth/login" class="font-weight-bold text-primary font-size-h4 ml-2"
+             id="kt_login_signu1p">
+            Sign in</a>
+        </div>
+      </div>
+      <!--end::Login Sign in form-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<button type="button" class="btn btn-light-danger font-weight-bold btn-sm"
+        (click)="open(content)">
+  Deactivate your account ?
+</button>
+<ng-template #content let-modal>
+  <app-modal-header name="Delete account"></app-modal-header>
+  <div class="p-5">
+    <h6>Are you sure that you want delete your account?</h6>
+    <div class="d-flex justify-content-end align-items-center mt-5">
+      <button type="button" class="btn btn-light-primary mr-3"
+              (click)="modal.close('Save click')">Cancel
+      </button>
+      <button type="button" class="btn btn-danger"
+              (click)="deleteAccount()">Delete
+      </button>
+    </div>
+  </div>
+</ng-template>

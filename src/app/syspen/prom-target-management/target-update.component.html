@@ -1,0 +1,54 @@
+<app-modal-header [name]="target?.id?'Edit target':'Create target'"></app-modal-header>
+<div class="container-fluid p-3">
+  <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <div class="form-group">
+      <label class="form-control-label" for="field_job">Target host</label>
+      <input type="text" class="form-control" name="targetHost" id="targetHost"
+             formControlName="targetHost"/>
+      <div
+        *ngIf="editForm.get('targetHost')!.invalid && (editForm.get('targetHost')!.dirty || editForm.get('targetHost')!.touched)">
+        <small class="form-text text-danger"
+               *ngIf="editForm.get('targetHost')?.errors?.required">
+          This field is required.
+        </small>
+        <small class="form-text text-danger"
+               *ngIf="editForm.get('targetHost')?.errors?.pattern">
+          This field is invalid.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label" for="field_job">Job</label>
+      <input type="text" class="form-control" name="job" id="field_job"
+             formControlName="job"/>
+      <div *ngIf="editForm.get('job')!.invalid && (editForm.get('job')!.dirty || editForm.get('job')!.touched)">
+        <small class="form-text text-danger"
+               *ngIf="editForm.get('job')?.errors?.required">
+          This field is required.
+        </small>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-control-label" for="field_job">Zone</label>
+      <textarea type="text" class="form-control" name="job" id="zone"
+                formControlName="zone"></textarea>
+    </div>
+
+  </form>
+  <div class="button-container d-flex justify-content-end mt-4">
+    <button (click)="activeModal.close()" class="btn btn btn-light-primary mr-3">
+      <i class="flaticon-close"></i>&nbsp;
+      Cancel
+    </button>
+    <button (click)="save()"
+            [disabled]="!editForm.valid"
+            class="btn btn-primary"
+            appButtonLoader [loading]="isSaving"
+            classIcon="flaticon-map">
+      {{target?.id ? 'Edit target' : 'Create target'}}
+    </button>
+  </div>
+</div>
+

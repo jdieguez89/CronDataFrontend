@@ -1,0 +1,18 @@
+<app-modal-header name="Delete user" type="delete"></app-modal-header>
+<div class="container-fluid p-3">
+  <form (ngSubmit)="confirmDelete(user.login)" name="deleteForm">
+    <h6>Are you sure you want to delete this User?</h6>
+
+    <div class="button-container d-flex justify-content-end mt-4">
+      <button (click)="activeModal.close()" class="btn btn btn-light-primary mr-3">
+        <i class="flaticon-close"></i>&nbsp;
+        Cancel
+      </button>
+      <button class="btn btn-danger"
+              type="submit">
+        <i class="flaticon-delete icon-nm"></i>&nbsp;
+        Delete
+      </button>
+    </div>
+  </form>
+</div>

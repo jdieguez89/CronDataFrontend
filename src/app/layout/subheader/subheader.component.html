@@ -1,0 +1,35 @@
+<ng-container *ngIf="layout === 'subheader-v1'">
+    <app-subheader1
+      [fixed]="fixed"
+      [clear]="clear"
+      [style]="style"
+      [displayDesc]="displayDesc"
+      [subheaderClasses]="subheaderClasses"
+      [subheaderContainerClasses]="subheaderContainerClasses"
+      [displayDaterangepicker]="displayDaterangepicker"
+    ></app-subheader1>
+</ng-container>
+
+<ng-container *ngIf="layout === 'subheader-v2'">
+    <app-subheader2
+      [fixed]="fixed"
+      [clear]="clear"
+      [style]="style"
+      [displayDesc]="displayDesc"
+      [subheaderClasses]="subheaderClasses"
+      [subheaderContainerClasses]="subheaderContainerClasses"
+      [displayDaterangepicker]="displayDaterangepicker"
+    ></app-subheader2>
+</ng-container>
+
+<ng-container *ngIf="layout === 'subheader-v3'">
+    <app-subheader3
+      [fixed]="fixed"
+      [clear]="clear"
+      [style]="style"
+      [displayDesc]="displayDesc"
+      [subheaderClasses]="subheaderClasses"
+      [subheaderContainerClasses]="subheaderContainerClasses"
+      [displayDaterangepicker]="displayDaterangepicker"
+    ></app-subheader3>
+</ng-container>

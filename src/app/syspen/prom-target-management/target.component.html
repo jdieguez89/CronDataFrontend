@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-between align-items-center my-4">
+  <h4 class="text-dark font-weight-bold my-1">Manage targets</h4>
+  <div class="header-elements">
+    <button (click)="createTarget()"
+            class="btn btn-primary">
+      <i class="flaticon-map icon-nm mr-2"></i> Create target
+    </button>
+  </div>
+</div>
+<div class="card w-100 h-100">
+  <div class="d-flex p-2 m-1 justify-content-between align-items-center">
+    <app-sort-by (sortBy)="onSort($event)" [fields]="fields"></app-sort-by>
+    <app-sys-search-input (searchFor)="searchTarget($event)"
+                          [searching]="searchingTarget"
+                          placeholder="Search host">
+    </app-sys-search-input>
+  </div>
+  <div *ngIf="targets && targets.length>0" class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th><span>Host</span></th>
+        <th><span>Job</span></th>
+        <th><span>Zone</span></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody *ngIf="targets">
+      <tr *ngFor="let target of targets; trackBy: trackIdentity">
+        <td>{{target.targetHost}}</td>
+        <td>{{target.job}}</td>
+        <td>{{target.zone}}</td>
+        <td class="text-center">
+          <div class="btn-group flex-btn-group-container medium-icon">
+            <span (click)="editTarget(target)"
+                  class="m-0 p-1 cursor-pointer medium-icon">
+              <i class="flaticon2-edit icon-nm"></i>
+            </span>
+            <span (click)="delete(target)"
+                  class="m-0 p-1 cursor-pointer medium-icon">
+              <i class="flaticon-delete icon-nm"></i>
+            </span>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="targets && targets.length>0" class="mb-3">
+    <div class="row justify-content-center">
+      <ngb-pagination (pageChange)="loadPage($event)" [(page)]="page" [boundaryLinks]="true"
+                      [collectionSize]="totalItems"
+                      [maxSize]="5"
+                      [pageSize]="itemsPerPage" [rotate]="true"></ngb-pagination>
+    </div>
+  </div>
+</div>

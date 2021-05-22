@@ -1,0 +1,58 @@
+<!--begin::Notifications-->
+<div ngbDropdown
+     placement="auto"
+     autoClose="outside"
+     container="body"
+     class="dropdown dropdown-fluid">
+  <!--begin::Toggle-->
+  <div ngbDropdownToggle class="topbar-item"
+       (click)="notificationNumber=0">
+    <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-white">
+      <span class="svg-icon svg-icon-xl svg-icon-white" [inlineSVG]="icon"></span>
+      <span class="pulse-ring" *ngIf="notificationNumber>0"></span>
+      <span class="label label-danger position-absolute top-0 left-0"
+            *ngIf="notificationNumber>0">
+          {{notificationNumber}}
+        </span>
+    </div>
+  </div>
+  <!--end::Toggle-->
+
+  <!--begin::Dropdown-->
+  <div ngbDropdownMenu
+       class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
+    <div class="p-8">
+      <div class="d-flex py-6 justify-content-center align-items-center"
+           *ngIf="notifications.length===0 && !loading">
+        <span class="svg-icon svg-icon-5x svg-icon-grey" [inlineSVG]="icon"></span>
+      </div>
+      <div class="pr-7 mr-n7 scroll" [perfectScrollbar]="{wheelPropagation: false}"
+           (scroll)="scroll()"
+           [ngStyle]="{'max-height': '350px', 'position': 'relative'}" *ngIf="notifications.length>0 && !loading">
+        <!--begin::Nav-->
+        <div class="d-flex align-items-center mb-6" *ngFor="let notification of notifications">
+          <div class="symbol symbol-40 symbol-circle mr-5"
+               [ngClass]="notification.notifType === notificationTypeEnum.OPENVAS?'symbol-primary':'symbol-success'">
+        						<span class="symbol-label">
+        							<span [inlineSVG]="notification.notifType === notificationTypeEnum.OPENVAS?
+        							'assets/media/svg/icons/Devices/Router2.svg'
+        							:'assets/media/svg/icons/Shopping/Credit-card.svg'"
+                            class="svg-icon svg-icon-lg svg-icon-white"></span>
+           </span>
+          </div>
+          <div class="d-flex flex-column font-weight-bold">
+            <a class="text-dark text-hover-primary mb-1 font-size-lg">
+              {{notification.notifName}}
+            </a>
+            <span class="text-muted">
+                      {{notification.notifDescription}}
+                    </span>
+          </div>
+        </div>
+        <!--end::Nav-->
+      </div>
+    </div>
+  </div>
+  <!--end::Dropdown-->
+</div>
+<!--end::Notifications-->

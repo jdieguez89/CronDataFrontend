@@ -1,0 +1,36 @@
+<div class="d-flex flex-column flex-root vh-100 w-100">
+  <!--begin::Login-->
+  <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid">
+    <!--begin::Aside-->
+    <div class="login-aside d-flex flex-column flex-row-auto">
+      <!--begin::Aside Top-->
+      <div class="d-flex flex-column-auto flex-column pt-lg-1 pt-1">
+        <!--begin::Aside Header-->
+        <a href="#" class="login-logo text-center pt-lg-25 pb-10 display-1">
+          <img src="assets/media/logos/logo-letter-13.svg" width="50px" height="50px" alt=""/>
+          <h3>CRONDATA</h3>
+        </a>
+        <!--end::Aside Header-->
+        <!--begin::Aside Title-->
+        <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50 line-height-xl">
+
+          <br/>Architecture manager</h3>
+        <!--end::Aside Title-->
+      </div>
+      <!--end::Aside Top-->
+      <!--begin::Aside Bottom-->
+      <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-x-center"
+           style="background-position-y: calc(100%);
+                 background-image: url(../../../../../assets/img/computer.png)"></div>
+      <!--end::Aside Bottom-->
+    </div>
+    <!--begin::Aside-->
+    <!--begin::Content-->
+    <div class="login-content flex-column-fluid d-flex flex-column p-10">
+      <!--begin::Wrapper-->
+      <div class="d-flex flex-row-fluid flex-center">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

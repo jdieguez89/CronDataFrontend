@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-between align-items-center my-4">
+  <h4 class="text-dark font-weight-bold my-1">Roles view</h4>
+</div>
+<div class="card w-100 h-100">
+  <div class="w-100 h-100">
+    <div class="table-responsive" *ngIf="roles">
+      <table class="table text-nowrap mb-0">
+        <thead>
+        <tr>
+          <th class="font-weight-semibold text-uppercase cursor-pointer" id="thName">
+            Name
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let role of roles">
+          <td>
+            {{role}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

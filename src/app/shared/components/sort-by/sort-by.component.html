@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-start align-items-center cursor-pointer">
+  <div [ngbPopover]="sortByPopover"
+       #popoverSort="ngbPopover"
+       class="d-flex justify-content-start align-items-center text-primary"
+       container="body"
+       placement="auto"
+       autoClose="outside"
+       triggers="click">
+    <i [ngClass]="sort?'icon-sort-amount-desc':'icon-sort-amount-asc'"></i>&nbsp;
+    <span class="svg-icon icon-sort"
+          [ngClass]="{'rotate-180':!sort}"
+          inlineSVG="assets/media/svg/icons/Shopping/Sort1.svg"></span>
+    <span class="px-3">{{label}}</span>
+  </div>
+  <span (click)="changeSort()"
+        class="font-weight-bold text-primary cursor-pointer">{{sort ? 'desc' : 'asc'}}</span>
+</div>
+<ng-template #sortByPopover>
+  <div class="animated fadeIn">
+    <a (click)="sortByFiled(field);popoverSort.close()" *ngFor="let field of fields"
+       class="dropdown-item text-primary">
+      {{field.fieldName}}
+    </a>
+  </div>
+</ng-template>
+

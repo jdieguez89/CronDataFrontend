@@ -1,0 +1,75 @@
+<span [ngbPopover]="customRange"
+      #popoverDateRange="ngbPopover"
+      class="font-weight-bold p-2 cursor-pointer"
+      container="body"
+      placement="auto"
+      autoClose="outside"
+      triggers="click">
+                  <span class="svg-icon"
+                        inlineSVG="assets/media/svg/icons/Design/Crop.svg"></span>
+         Custom range
+      </span>
+
+<ng-template #customRange>
+  <div class="pr-2 pl-2" id="customRange">
+    <div class="d-flex justify-content-start flex-column align-items-center mb-2">
+      <div class="form-group w-100 m-0">
+        <label class="pb-1" for="timeFrom">Time from</label>
+        <div class="input-group">
+          <input #timeFromRange="ngModel" #ttf="ngbDatepicker"
+                 [(ngModel)]="rangeTimeFrom" [maxDate]="maxDate"
+                 [ngClass]="{'input-field-has-error':!isValidDate()}"
+                 class="form-control " id="timeFrom"
+                 name="d2"
+                 ngbDatepicker
+                 placeholder="yyyy/mm/dd">
+          <div class="input-group-append">
+            <button (click)="ttf.toggle()" class="btn btn-light-primary" type="button">
+              <i class="flaticon2-calendar-7"></i>
+            </button>
+          </div>
+        </div>
+        <ngb-timepicker [size]="'small'" [seconds]="true" [(ngModel)]="timeFrom"></ngb-timepicker>
+      </div>
+    </div>
+    <div class="d-flex justify-content-start flex-column align-items-center">
+      <div class="form-group w-100 m-0">
+        <label class="pb-1" for="timeTo">Time to</label>
+        <div class="input-group">
+          <input #timeToRange="ngModel" #ttr="ngbDatepicker"
+                 [(ngModel)]="rangeTimeTo" [maxDate]="maxDate"
+                 [ngClass]="{'input-field-has-error':!isValidDate()}"
+                 class="form-control" id="timeTo"
+                 name="d2"
+                 ngbDatepicker
+                 placeholder="yyyy/mm/dd">
+          <div class="input-group-append">
+            <button (click)="ttr.toggle()" class="btn btn-light-primary" type="button">
+              <i class="flaticon2-calendar-8"></i>
+            </button>
+          </div>
+        </div>
+
+        <ngb-timepicker [size]="'small'" [seconds]="true" [(ngModel)]="timeTo"></ngb-timepicker>
+      </div>
+    </div>
+    <div class="d-flex flex-column justify-content-between">
+             <span class="text-danger" *ngIf="!isValidDate()">
+             Date range is invalid
+            </span>
+    </div>
+    <div class="d-flex justify-content-around align-items-center mt-2">
+      <button (click)="popoverDateRange.close()"
+              class="btn btn-light-primary">
+        <i class="flaticon-close"></i>
+        Cancel
+      </button>
+      <button (click)="applyRange();popoverDateRange.close();"
+              [disabled]="!isValidDate()"
+              class="btn btn-primary">
+        <i class="flaticon-calendar-3"></i>
+        {{'filter.time.range.button' | translate}}
+      </button>
+    </div>
+  </div>
+</ng-template>

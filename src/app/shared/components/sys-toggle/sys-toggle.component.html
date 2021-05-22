@@ -1,0 +1,10 @@
+<div class="d-flex align-items-center cursor-pointer" (click)="toggle()">
+  <span class="switch switch-sm">
+		<label>
+				<input type="checkbox" name="select" (click)="toggle()"
+               [(ngModel)]="active">
+				<span></span>
+		</label>
+  </span>
+  <span class="font-size-base ml-2">{{label}}</span>
+</div>

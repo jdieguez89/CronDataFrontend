@@ -1,0 +1,30 @@
+<app-modal-header [name]="'Health detail'"
+                  class="w-100"></app-modal-header>
+<div class="container-fluid p-3">
+  <div *ngIf="health">
+    <h5>Properties</h5>
+
+    <div class="table-responsive">
+      <table class="table table-striped" aria-describedby="showHealthLabel">
+        <thead>
+        <tr>
+          <th scope="col" class="text-left">Name</th>
+          <th scope="col" class="text-left">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let healthDetail of health.value.details | keys">
+          <td class="text-left">{{ healthDetail.key }}</td>
+          <td class="text-left">{{ readableValue(healthDetail.value) }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="button-container d-flex justify-content-end mt-4">
+    <button (click)="activeModal.close()" class="btn btn-danger mr-3">
+      <i class="flaticon-close"></i>&nbsp;
+      Close
+    </button>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title font-weight-bold">Confirm delete operation</h4>
+    <button (click)="cancelDelete()" aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+  </div>
+  <div class="modal-body font-weight-bold">
+    Are you sure that you want to delete the role {{role.nameShow}}.
+  </div>
+  <div class="modal-footer">
+    <button (click)="cancelDelete()" class="btn btn btn-light-primary" data-dismiss="modal" type="button">
+      Cancel
+    </button>
+    <button (click)="deleteConfirmation()" class="btn btn-danger">
+      Delete
+    </button>
+  </div>
+</div>

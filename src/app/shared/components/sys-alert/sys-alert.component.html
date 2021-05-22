@@ -1,0 +1,13 @@
+<div class="alert alert-custom fade show p-3" role="alert" *ngIf="noClosed"
+     [ngClass]="'alert-light-'+type">
+    <span class="svg-icon svg-icon-3x mr-2" [ngClass]="'svg-icon-'+type" [inlineSVG]="resolveIconByType()">
+    </span>
+  <div class="alert-text" [innerHTML]="alert"></div>
+  <div class="alert-close">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="noClosed=false">
+				<span aria-hidden="true">
+				    <i class="flaticon2-cross"></i>
+				</span>
+    </button>
+  </div>
+</div>

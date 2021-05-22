@@ -1,0 +1,13 @@
+#kt_header_mobile {
+  background-color: #3699FF
+}
+
+.burger-icon {
+  span {
+    background-color: #ffffff !important;
+
+    &::after, &::before {
+      background-color: #ffffff !important;
+    }
+  }
+}

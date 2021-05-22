@@ -1,0 +1,8 @@
+<div class="input-icon"
+     [ngClass]="{'spinner spinner-left spinner-sm':(searching || typing)}">
+  <input class="form-control" type="text"
+         #searcherInput (input)="search($event)" [(ngModel)]="valueSearch" [placeholder]="placeholder"/>
+  <span class="svg-icon" inlineSVG="assets/media/svg/icons/General/Search.svg"
+        *ngIf="(!searching && !typing)">
+  </span>
+</div>

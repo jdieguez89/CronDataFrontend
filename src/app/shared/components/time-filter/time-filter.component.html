@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-start align-items-center cursor-pointer pr-2">
+  <div #popover="ngbPopover"
+       container="body"
+       [ngbPopover]="popContent"
+       autoClose="outside"
+       class="cursor-pointer text-primary d-flex justify-content-center align-items-center"
+       placement="auto">
+    <i class="flaticon-calendar mr-2"></i>
+    <div *ngIf="dateFrom && dateTo"
+         class="d-flex justify-content-between align-items-center span-small-icon text-nowrap">
+      <span class="font-weight-semibold">{{dateFrom}}</span>
+      <span class="svg-icon mx-2" inlineSVG="assets/media/svg/icons/Navigation/Arrow-right.svg"></span>
+      <span class="font-weight-semibold">{{dateTo}}</span>
+    </div>
+  </div>
+
+</div>
+<ng-template #popContent>
+  <div class="d-flex justify-content-between align-items-center p-2 mb-2
+    border-bottom-1 border-grey-100 pb-3">
+    <input [(ngModel)]="lastTime" class="form-control mr-2 w-50"
+           min="1"
+           placeholder="Last" type="number">
+    <ng-select [(ngModel)]="timeUnit" [clearable]="true"
+               [items]="times"
+               [searchable]="false"
+               autofocus
+               bindLabel="label"
+               class="mr-2 w-100">
+    </ng-select>
+    <button (click)="applyDate();popover.close()"
+            [disabled]="!lastTime || !timeUnit" class="btn btn-primary d-flex p-2">
+      <span class="svg-icon" inlineSVG="assets/media/svg/icons/Navigation/Check.svg"></span>
+      Apply
+    </button>
+  </div>
+  <app-time-common-used (commonChange)="applyCommonDate($event);popover.close()"></app-time-common-used>
+  <div class="mt-2">
+    <app-time-range-filter (rangeChange)="applyRange($event)"></app-time-range-filter>
+  </div>
+  <div class="d-flex justify-content-end">
+      <span [ngbTooltip]="htmlContent"
+            class="text-primary cursor-pointer"
+            container="body"
+            placement="auto"
+            [autoClose]="true">
+        <i class="flaticon-questions-circular-button"></i>
+      </span>
+    <ng-template #htmlContent>
+    <span class="text-left d-flex justify-content-start">
+     now: Current date<br>y: Year<br>M: Month<br>w: Week<br>d: Day<br>h: Hour<br>H: Hour<br>m: Minutes<br>s: Second
+    </span>
+    </ng-template>
+  </div>
+</ng-template>

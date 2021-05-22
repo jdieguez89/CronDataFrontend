@@ -1,1 +1,185 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import 'assets/sass/style';
+
+@import "~swiper/swiper";
+@import '~ngx-toastr/toastr-old.css';
+
+// Default Layout themes
+//@import "./assets/sass/themes/layout/header/base/dark.scss";
+//@import "./assets/sass/themes/layout/header/menu/light.scss";
+@import "./assets/sass/themes/layout/header/base/dark.scss";
+@import "./assets/sass/themes/layout/header/menu/dark.scss";
+@import "./assets/sass/themes/layout/brand/dark.scss";
+@import "./assets/sass/themes/layout/aside/dark.scss";
+
+//ICONS
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "./assets/plugins/flaticon/flaticon.css";
+@import "./assets/plugins/flaticon2/flaticon.css";
+@import "./assets/styles/icons";
+@import "./assets/styles/magic-check/sass/magic-check";
+@import "./assets/styles/theme";
+
+// Header Menu themes
+//.header-menu-light {
+//  @import "./assets/sass/themes/layout/header/menu/light.scss";
+//}
+
+.header-menu-dark {
+  @import "./assets/sass/themes/layout/header/menu/dark.scss";
+}
+
+// Brand themes
+.brand-dark {
+  @import "./assets/sass/themes/layout/brand/dark.scss";
+}
+
+//.brand-light {
+//  @import "./assets/sass/themes/layout/brand/light.scss";
+//}
+
+//Aside themes
+//.aside-dark {
+//  @import "./assets/sass/themes/layout/aside/dark.scss";
+//}
+
+.aside-light {
+  @import "./assets/sass/themes/layout/aside/light.scss";
+}
+
+//hide bootstrap dropdown arrow globally
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.mat-table-wrapper-dashboard .mat-table {
+  min-width: 600px !important;
+  width: 100% !important;
+}
+
+.position-static {
+  position: static;
+}
+
+.dropdown-fluid {
+  height: 100%;
+
+  .topbar-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #F2F3F7;
+  color: #3F4254;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 300;
+}
+
+a:hover {
+  /* make sure browsers use the pointer cursor for anchors, even with no href */
+  cursor: pointer;
+}
+
+.chart-fixed-height {
+  height: 300px;
+  max-height: 300px;
+}
+
+.kpi-fixed-height {
+  height: 150px;
+  max-height: 150px;
+}
+
+.card-chart-header {
+  height: 50px;
+  min-height: 50px;
+}
+
+.add-action-form {
+  cursor: pointer;
+  color: $primary-color;
+}
+//
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "./assets/styles/custom/custom";
+
+
+.rotate-icon {
+  svg {
+    transform: rotate(180deg);
+    transition: ease-in-out;
+    transition-duration: 0.2s;
+  }
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+
+//custom scrollbar
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $grey-color;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $grey-color;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0;
+  box-shadow: inset 0 0 0 transparent;
+  background: #e8e8e8;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  box-shadow: inset 0 0 0 transparent;;
+}
+
+.scroll-0 {
+  overflow-y: hidden !important;
+}

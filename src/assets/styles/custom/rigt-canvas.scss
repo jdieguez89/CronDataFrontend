@@ -1,0 +1,45 @@
+@import "../theme";
+
+.utm-right-container {
+  z-index: 120;
+  position: fixed;
+  //height: 100%;
+  width: 100%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+
+  .utm-right-action {
+    width: 700px;
+    height: 100%;
+    background-color: #ffffff;
+    transition: ease-out;
+    transition-duration: 1s;
+    overflow-y: auto;
+    //max-height: 85%;
+  }
+
+  .utm-right-action-lg {
+    width: 75% !important;
+  }
+
+  .utm-right-action-md {
+    width: 50% !important;
+  }
+
+  .overlay-md {
+    width: 50% !important;
+  }
+
+  .overlay {
+    background-color: rgba(34, 34, 34, 0.58);
+    height: 100%;
+    width: 100%;
+  }
+
+  .overlay-lg {
+    width: 25% !important;
+  }
+}

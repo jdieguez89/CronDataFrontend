@@ -1,0 +1,19 @@
+@import "../theme";
+
+.card {
+  .card-header-title {
+    label {
+      font-size: 13px !important;
+      color: $primary-color !important;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+}
+
+.card.card-custom > .card-header .card-title, .card.card-custom > .card-header .card-title .card-label {
+  font-weight: 400;
+  font-size: 1.275rem;
+  color: #181C32;
+}

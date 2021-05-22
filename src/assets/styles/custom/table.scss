@@ -1,0 +1,72 @@
+@import "../theme";
+
+
+.table {
+  thead {
+    tr {
+      th {
+        font-size: 12px;
+      }
+
+      th[appColumnSortable] {
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        position: relative;
+      }
+
+      th[appColumnSortable].utm-table-sort-desc:before,
+      th[appColumnSortable].utm-table-sort-asc:before {
+        content: '\f120';
+        font-family: Flaticon, sans-serif;
+        position: absolute;
+        font-size: 10px;
+        right: 3px;
+        top: 30%;
+        vertical-align: center;
+      }
+
+      th[appColumnSortable].utm-table-sort-desc:before {
+        transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+      }
+
+      th[appColumnSortable].utm-table-sort-none {
+        &:before {
+          font-family: Flaticon, sans-serif;
+          position: absolute;
+          font-size: 10px;
+          color: #777777;
+          right: 3px;
+          top: 14px;
+          vertical-align: center;
+          content: '\f120' !important;
+        }
+
+        &:after {
+          content: '\f120' !important;
+          font-family: Flaticon, sans-serif;
+          font-size: 10px;
+          position: absolute;
+          color: #777777;
+          right: 3px;
+          top: 30%;
+          vertical-align: center;
+          transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        //font-size: .75rem;
+        padding: .70rem;
+        vertical-align: middle !important;
+        word-break: break-all;
+      }
+    }
+  }
+}

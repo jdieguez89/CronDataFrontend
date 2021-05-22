@@ -1,0 +1,13 @@
+<div class="card-header py-3 w-100 d-flex justify-content-between align-items-center">
+  <div class="card-title align-items-start flex-column m-0">
+    <h3 class="card-label font-weight-bolder text-dark">{{section}}</h3>
+    <span class="text-muted font-weight-bold font-size-sm mt-1">{{subtext}}</span>
+  </div>
+  <div class="card-toolbar">
+    <button class="btn btn-primary mr-2"
+            appButtonLoader [loading]="saving" classIcon="flaticon-user-settings"
+            (click)="saveAccount()"
+            [disabled]="saving">Save Changes
+    </button>
+  </div>
+</div>
