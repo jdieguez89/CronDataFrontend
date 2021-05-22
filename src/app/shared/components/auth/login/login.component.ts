@@ -74,7 +74,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
         this.authenticationError = false;
         this.loading = false;
         // this.activeModal.close();
-        this.router.navigate(['/app']);
+        this.router.navigate(['/app/crondata/frame/grafana']);
         // if (
         //   this.router.url === '/account/register' ||
         //   this.router.url.startsWith('/account/activate') ||

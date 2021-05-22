@@ -21,8 +21,8 @@ export class TargetDeleteDialogComponent {
     this.activeModal.dismiss();
   }
 
-  confirmDelete(id: number): void {
-    this.targetService.delete(id).subscribe(() => {
+  confirmDelete(): void {
+    this.targetService.delete(this.target.id).subscribe(() => {
       this.targetDeleted.emit('success_delete');
       this.sysToasrtService.showSuccess('Target deleted successfully');
       this.activeModal.close();
