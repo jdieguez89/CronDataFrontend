@@ -53,13 +53,22 @@ export class MenuConfig {
           authorities: [ADMIN_ROLE],
         },
         {
+          title: 'Manage targets',
+          root: true,
+          alignment: 'left',
+          toggle: 'click',
+          translate: 'app.management.title',
+          page: '/app/crondata/metric-targets',
+          authorities: [ADMIN_ROLE],
+        },
+        {
           title: 'Grafana',
           root: true,
           alignment: 'left',
           toggle: 'click',
           translate: 'app.management.title',
           page: '/app/crondata/frame/grafana',
-          authorities: [ADMIN_ROLE,USER_ROLE],
+          authorities: [ADMIN_ROLE, USER_ROLE],
         },
         {
           title: 'Prometheus',

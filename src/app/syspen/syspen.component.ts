@@ -1,14 +1,14 @@
 // Angular
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {PageConfig} from '../layout/shared/config/page.config';
-import {MenuConfig} from '../layout/shared/config/menu.config';
-import {LayoutConfig} from '../layout/shared/config/layout.config';
-import {HtmlClassService} from '../layout/shared/services/html-class.service';
-import {MenuConfigService} from '../layout/shared/services/menu-config.service';
-import {LayoutConfigService} from '../layout/shared/services/layout-config.service';
-import {PageConfigService} from '../layout/shared/services/page-config.service';
-import {Subscription} from 'rxjs';
 import * as objectPath from 'object-path';
+import {Subscription} from 'rxjs';
+import {LayoutConfig} from '../layout/shared/config/layout.config';
+import {MenuConfig} from '../layout/shared/config/menu.config';
+import {PageConfig} from '../layout/shared/config/page.config';
+import {HtmlClassService} from '../layout/shared/services/html-class.service';
+import {LayoutConfigService} from '../layout/shared/services/layout-config.service';
+import {MenuConfigService} from '../layout/shared/services/menu-config.service';
+import {PageConfigService} from '../layout/shared/services/page-config.service';
 // RxJS
 // Object-Path
 // Layout
