@@ -40,6 +40,7 @@ export class TargetComponent implements OnInit, OnDestroy {
       field: 'job'
     }
   ];
+  loading = true;
 
   constructor(
     protected targetService: TargetService,
@@ -86,7 +87,7 @@ export class TargetComponent implements OnInit, OnDestroy {
   protected onSuccess(data: ITarget[] | null, headers: HttpHeaders): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.targets = data || [];
-
+    this.loading = false;
   }
 
   protected onError(): void {

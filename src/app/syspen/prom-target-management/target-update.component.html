@@ -17,6 +17,18 @@
         </small>
       </div>
     </div>
+    <div class="form-group">
+      <label class="form-control-label" for="field_job">Port</label>
+      <input type="number" class="form-control" name="port" id="port"
+             formControlName="port"/>
+      <div *ngIf="editForm.get('port')!.invalid && (editForm.get('port')!.dirty || editForm.get('port')!.touched)">
+        <small class="form-text text-danger"
+               *ngIf="editForm.get('port')?.errors?.required">
+          This field is required.
+        </small>
+
+      </div>
+    </div>
 
     <div class="form-group">
       <label class="form-control-label" for="field_job">Job</label>

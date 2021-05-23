@@ -5,10 +5,10 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {delay} from 'rxjs/operators';
 import {SysToasrtService} from '../../shared/alert/sys-toasrt.service';
 import {ITarget, Target} from './target.model';
 import {TargetService} from './target.service';
-import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-target-update',
@@ -25,6 +25,7 @@ export class TargetUpdateComponent implements OnInit {
       '{3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9' +
       '\\-]*[a-zA-Z0-9])\\.)+([A-Za-z]|[A-Za-z][A-Za-z0-9\\-]*[A-Za-z0-9])$ ')]],
     job: [null, [Validators.required]],
+    port: ['', [Validators.required]],
     zone: []
   });
 
@@ -48,6 +49,7 @@ export class TargetUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: target.id,
       targetHost: target.targetHost,
+      port: target.port,
       job: target.job,
       zone: target.zone,
     });
@@ -64,11 +66,12 @@ export class TargetUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): { targetHost?: string; zone?: string; id: any; job: any } {
+  private createFromForm(): { targetHost?: string; zone?: string; port: number, id: any; job: any } {
     return {
       ...new Target(),
-      id: this.editForm.get(['id'])!.value,
       targetHost: this.editForm.get(['targetHost'])!.value,
+      port: this.editForm.get(['port'])!.value,
+      id: this.editForm.get(['id'])!.value,
       job: this.editForm.get(['job'])!.value,
       zone: this.editForm.get(['zone'])!.value,
     };

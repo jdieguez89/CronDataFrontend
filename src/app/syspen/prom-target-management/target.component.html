@@ -7,7 +7,7 @@
     </button>
   </div>
 </div>
-<div class="card w-100 h-100">
+<div class="card w-100 h-100">Ad
   <div class="d-flex p-2 m-1 justify-content-between align-items-center">
     <app-sort-by (sortBy)="onSort($event)" [fields]="fields"></app-sort-by>
     <app-sys-search-input (searchFor)="searchTarget($event)"
@@ -15,19 +15,21 @@
                           placeholder="Search host">
     </app-sys-search-input>
   </div>
-  <div *ngIf="targets && targets.length>0" class="table-responsive">
+  <div class="table-responsive">
     <table class="table">
       <thead>
       <tr>
         <th><span>Host</span></th>
+        <th><span>Port</span></th>
         <th><span>Job</span></th>
         <th><span>Zone</span></th>
         <th></th>
       </tr>
       </thead>
-      <tbody *ngIf="targets">
+      <tbody *ngIf="targets.length>0 && !loading">
       <tr *ngFor="let target of targets; trackBy: trackIdentity">
         <td>{{target.targetHost}}</td>
+        <td>{{target.port}}</td>
         <td>{{target.job}}</td>
         <td>{{target.zone}}</td>
         <td class="text-center">
@@ -40,6 +42,26 @@
                   class="m-0 p-1 cursor-pointer medium-icon">
               <i class="flaticon-delete icon-nm"></i>
             </span>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+      <tbody *ngIf="targets.length === 0 && !loading">
+      <tr>
+        <td colspan="4">
+          <app-no-data-found></app-no-data-found>
+        </td>
+      </tr>
+      </tbody>
+      <tbody *ngIf="loading">
+      <tr>
+        <td colspan="5">
+          <div class="p-5 d-flex  justify-content-center align-items-center text-blue-800">
+            <app-sys-spinner [height]="'35px'"
+                             [label]="'Loading targets'"
+                             [loading]="loading"
+                             [width]="'35px'">
+            </app-sys-spinner>
           </div>
         </td>
       </tr>
