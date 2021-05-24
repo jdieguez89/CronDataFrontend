@@ -1,5 +1,6 @@
 // Angular
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router} from '@angular/router';
 import * as objectPath from 'object-path';
 import {Subscription} from 'rxjs';
 import {LayoutConfig} from '../layout/shared/config/layout.config';
@@ -45,6 +46,7 @@ export class SyspenComponent implements OnInit, OnDestroy {
     private layoutConfigService: LayoutConfigService,
     private menuConfigService: MenuConfigService,
     private pageConfigService: PageConfigService,
+    private router: Router,
     private htmlClassService: HtmlClassService) {
     // register configs by demos
     this.layoutConfigService.loadConfigs(new LayoutConfig().configs);
@@ -78,7 +80,7 @@ export class SyspenComponent implements OnInit, OnDestroy {
     this.contentClasses = this.htmlClassService.getClasses('content', true).toString();
     this.contentContainerClasses = this.htmlClassService.getClasses('content_container', true).toString();
     this.contentExtended = objectPath.get(config, 'content.extended');
-
+    this.setLayoutPadding();
     // let the layout type change
     const subscription = this.layoutConfigService.onConfigUpdated$.subscribe(cfg => {
       setTimeout(() => {
@@ -86,6 +88,19 @@ export class SyspenComponent implements OnInit, OnDestroy {
       });
     });
     this.unsubscribe.push(subscription);
+
+    this.router.events.subscribe((event: any) => {
+      this.setLayoutPadding();
+    });
+  }
+
+  setLayoutPadding() {
+    if (this.router.url.includes('/frame/')) {
+      console.log('IN FRAME LAYOUT');
+      this.contentContainerClasses = 'container-fluid p-0 m-0';
+    } else {
+      this.contentContainerClasses = this.htmlClassService.getClasses('content_container', true).toString();
+    }
   }
 
   /**

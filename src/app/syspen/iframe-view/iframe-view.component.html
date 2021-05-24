@@ -1,3 +1,5 @@
-<iframe [src]="urlIframe | safe:'resourceUrl'" frameborder="0" allowpaymentrequest width="auto" [height]="iHeight"
-        style="width: 100%"
-        (load)="loading = false" id="clientFrame"></iframe>
+<div class="iframe-container" style="position: relative" [ngClass]="{'min-height':iHeight}">
+  <iframe [src]="urlIframe | safe:'resourceUrl'" frameborder="0" allowpaymentrequest width="auto" [height]="iHeight"
+          style="width: 100%"
+          (load)="loading = false" id="clientFrame"></iframe>
+</div>

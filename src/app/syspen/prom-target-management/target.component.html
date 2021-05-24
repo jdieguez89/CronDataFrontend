@@ -7,7 +7,7 @@
     </button>
   </div>
 </div>
-<div class="card w-100 h-100">Ad
+<div class="card w-100 h-100">
   <div class="d-flex p-2 m-1 justify-content-between align-items-center">
     <app-sort-by (sortBy)="onSort($event)" [fields]="fields"></app-sort-by>
     <app-sys-search-input (searchFor)="searchTarget($event)"
@@ -26,7 +26,7 @@
         <th></th>
       </tr>
       </thead>
-      <tbody *ngIf="targets.length>0 && !loading">
+      <tbody *ngIf="targets && targets.length>0 && !loading">
       <tr *ngFor="let target of targets; trackBy: trackIdentity">
         <td>{{target.targetHost}}</td>
         <td>{{target.port}}</td>
@@ -46,7 +46,7 @@
         </td>
       </tr>
       </tbody>
-      <tbody *ngIf="targets.length === 0 && !loading">
+      <tbody *ngIf="targets && targets.length === 0 && !loading">
       <tr>
         <td colspan="4">
           <app-no-data-found></app-no-data-found>
