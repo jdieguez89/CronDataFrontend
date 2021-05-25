@@ -3,11 +3,11 @@ export interface ITarget {
   targetHost?: string;
   port?: number;
   job?: string;
-  zone?: string;
+  description?: string;
 }
 
 
 export class Target implements ITarget {
-  constructor(public targetHost?: string, public port?: number, public id?: number, public job?: string, public zone?: string) {
+  constructor(public targetHost?: string, public port?: number, public id?: number, public job?: string, public description?: string) {
   }
 }

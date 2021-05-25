@@ -51,7 +51,7 @@ export class TargetUpdateComponent implements OnInit {
       targetHost: target.targetHost,
       port: target.port,
       job: target.job,
-      zone: target.zone,
+      description: target.description,
     });
   }
 
@@ -66,14 +66,14 @@ export class TargetUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): { targetHost?: string; zone?: string; port: number, id: any; job: any } {
+  private createFromForm(): { targetHost?: string; description?: string; port: number, id: any; job: any } {
     return {
       ...new Target(),
       targetHost: this.editForm.get(['targetHost'])!.value,
       port: this.editForm.get(['port'])!.value,
       id: this.editForm.get(['id'])!.value,
       job: this.editForm.get(['job'])!.value,
-      zone: this.editForm.get(['zone'])!.value,
+      description: this.editForm.get(['description'])!.value,
     };
   }
 
