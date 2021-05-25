@@ -6,6 +6,42 @@ export class MenuConfig {
       self: {},
       items: [
         {
+          title: 'Grafana',
+          root: true,
+          alignment: 'left',
+          toggle: 'click',
+          translate: 'app.management.title',
+          page: '/app/crondata/frame/grafana',
+          authorities: [ADMIN_ROLE, USER_ROLE],
+        },
+        {
+          title: 'Prometheus',
+          root: true,
+          alignment: 'left',
+          toggle: 'click',
+          translate: 'app.management.title',
+          page: '/app/crondata/frame/prometheus',
+          authorities: [ADMIN_ROLE, USER_ROLE],
+        },
+        {
+          title: 'Manage targets',
+          root: true,
+          alignment: 'left',
+          toggle: 'click',
+          translate: 'app.management.title',
+          page: '/app/crondata/metric-targets',
+          authorities: [ADMIN_ROLE],
+        },
+        {
+          title: 'Manage users',
+          root: true,
+          alignment: 'left',
+          toggle: 'click',
+          translate: 'app.management.title',
+          page: '/app/crondata/admin/user',
+          authorities: [ADMIN_ROLE],
+        },
+        {
           title: 'App checks',
           root: true,
           alignment: 'left',
@@ -43,42 +79,6 @@ export class MenuConfig {
             }
           ]
         },
-        {
-          title: 'Manage users',
-          root: true,
-          alignment: 'left',
-          toggle: 'click',
-          translate: 'app.management.title',
-          page: '/app/crondata/admin/user',
-          authorities: [ADMIN_ROLE],
-        },
-        {
-          title: 'Manage targets',
-          root: true,
-          alignment: 'left',
-          toggle: 'click',
-          translate: 'app.management.title',
-          page: '/app/crondata/metric-targets',
-          authorities: [ADMIN_ROLE],
-        },
-        {
-          title: 'Grafana',
-          root: true,
-          alignment: 'left',
-          toggle: 'click',
-          translate: 'app.management.title',
-          page: '/app/crondata/frame/grafana',
-          authorities: [ADMIN_ROLE, USER_ROLE],
-        },
-        {
-          title: 'Prometheus',
-          root: true,
-          alignment: 'left',
-          toggle: 'click',
-          translate: 'app.management.title',
-          page: '/app/crondata/frame/prometheus',
-          authorities: [ADMIN_ROLE,USER_ROLE],
-        }
       ]
     },
     aside: {
