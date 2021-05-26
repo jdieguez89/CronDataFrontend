@@ -12,7 +12,7 @@ export class SysToasrtService {
   }
 
   showSuccess(msg: string): void {
-    this.toastr.success(msg, 'Logged');
+    this.toastr.success(msg, 'Success');
   }
 
   showError(title: string, msg: string): void {
