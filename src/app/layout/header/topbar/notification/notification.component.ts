@@ -1,10 +1,10 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Subscription} from 'rxjs';
+import {SysHttpResponseErrorService} from '../../../../shared/services/sys-http-response-error.service';
+import {NotificationSeverityEnum} from './shared/emun/notification.enum';
 import {NotificationService} from './shared/service/notification.service';
 import {NotificationType} from './shared/type/notification.type';
-import {SysHttpResponseErrorService} from '../../../../shared/services/sys-http-response-error.service';
-import {NotificationEnum} from './shared/emun/notification.enum';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-notification',
@@ -37,9 +37,14 @@ export class NotificationComponent implements OnInit, OnDestroy {
   @Input() type: 'brand' | 'success' = 'success';
   notifications: NotificationType[] = [];
   loading = true;
-  notificationNumber = 5;
-  notificationTypeEnum = NotificationEnum;
+  notificationNumber: string | null = '';
+  notificationTypeEnum = NotificationSeverityEnum;
   subscription?: Subscription;
+  req = {
+    page: 0,
+    size: 15,
+    sort: 'receivedAt,desc',
+  };
 
   constructor(private sanitizer: DomSanitizer,
               private notificationService: NotificationService,
@@ -47,10 +52,25 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    this.getNotifications();
   }
 
   ngOnDestroy(): void {
+  }
+
+  getNotifications() {
+    this.notificationService.query(this.req).subscribe(response => {
+      if (response.body) {
+        this.notificationNumber = Number(response.headers.get('X-TOTAL-COUNT')) > 20 ? '+20' : response.headers.get('X-TOTAL-COUNT');
+        for (const res of response.body) {
+          const exist = this.notifications.includes(res);
+          if (!exist) {
+            this.notifications.push(res);
+          }
+        }
+        this.loading = false;
+      }
+    });
   }
 
   backGroundStyle(): string {
@@ -62,6 +82,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   scroll(): void {
-    console.log('scroll');
+    this.req.page += 1;
+    this.getNotifications();
   }
 }

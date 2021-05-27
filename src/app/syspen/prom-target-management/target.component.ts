@@ -24,6 +24,7 @@ export class TargetComponent implements OnInit, OnDestroy {
     page: this.page,
     size: this.itemsPerPage,
     sort: 'id,asc',
+    'host.contains': null
   };
   searchingTarget: any;
   fields: SortByType[] = [
@@ -33,7 +34,7 @@ export class TargetComponent implements OnInit, OnDestroy {
     },
     {
       fieldName: 'Host',
-      field: 'targetHost'
+      field: 'host'
     },
     {
       fieldName: 'Job',
@@ -76,7 +77,7 @@ export class TargetComponent implements OnInit, OnDestroy {
   }
 
   delete(target: ITarget): void {
-    const modalRef = this.modalService.open(TargetDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
+    const modalRef = this.modalService.open(TargetDeleteDialogComponent, {centered: true, size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.target = target;
     modalRef.componentInstance.targetDeleted.subscribe(() => {
       this.getTargets();
@@ -101,8 +102,10 @@ export class TargetComponent implements OnInit, OnDestroy {
     });
   }
 
-  searchTarget($event: string) {
-
+  searchTarget($event: any) {
+    this.request['host.contains'] = $event;
+    this.request.page = 0;
+    this.getTargets();
   }
 
   editTarget(target: any) {

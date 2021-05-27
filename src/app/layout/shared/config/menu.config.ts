@@ -24,6 +24,15 @@ export class MenuConfig {
           authorities: [ADMIN_ROLE, USER_ROLE],
         },
         {
+          title: 'Alerts',
+          root: true,
+          alignment: 'left',
+          toggle: 'click',
+          translate: 'app.management.title',
+          page: '/app/crondata/alerts',
+          authorities: [ADMIN_ROLE],
+        },
+        {
           title: 'Manage targets',
           root: true,
           alignment: 'left',

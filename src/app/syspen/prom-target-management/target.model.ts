@@ -1,6 +1,6 @@
 export interface ITarget {
   id?: number;
-  targetHost?: string;
+  host?: string;
   port?: number;
   job?: string;
   description?: string;
@@ -8,6 +8,6 @@ export interface ITarget {
 
 
 export class Target implements ITarget {
-  constructor(public targetHost?: string, public port?: number, public id?: number, public job?: string, public description?: string) {
+  constructor(public host?: string, public port?: number, public id?: number, public job?: string, public description?: string) {
   }
 }

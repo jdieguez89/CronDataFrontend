@@ -3,16 +3,16 @@
   <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
     <div class="form-group">
       <label class="form-control-label" for="field_job">Target host</label>
-      <input type="text" class="form-control" name="targetHost" id="targetHost"
-             formControlName="targetHost"/>
+      <input type="text" class="form-control" name="host" id="host"
+             formControlName="host"/>
       <div
-        *ngIf="editForm.get('targetHost')!.invalid && (editForm.get('targetHost')!.dirty || editForm.get('targetHost')!.touched)">
+        *ngIf="editForm.get('host')!.invalid && (editForm.get('host')!.dirty || editForm.get('host')!.touched)">
         <small class="form-text text-danger"
-               *ngIf="editForm.get('targetHost')?.errors?.required">
+               *ngIf="editForm.get('host')?.errors?.required">
           This field is required.
         </small>
         <small class="form-text text-danger"
-               *ngIf="editForm.get('targetHost')?.errors?.pattern">
+               *ngIf="editForm.get('host')?.errors?.pattern">
           This field is invalid.
         </small>
       </div>

@@ -28,7 +28,7 @@
       </thead>
       <tbody *ngIf="targets && targets.length>0 && !loading">
       <tr *ngFor="let target of targets; trackBy: trackIdentity">
-        <td>{{target.targetHost}}</td>
+        <td>{{target.host}}</td>
         <td>{{target.port}}</td>
         <td>{{target.job}}</td>
         <td>{{target.description}}</td>

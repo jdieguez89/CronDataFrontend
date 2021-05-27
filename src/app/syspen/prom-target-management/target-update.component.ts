@@ -21,7 +21,7 @@ export class TargetUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    targetHost: ['', [Validators.required]],
+    host: ['', [Validators.required]],
     job: [null, [Validators.required]],
     port: ['', [Validators.required]],
     description: []
@@ -38,7 +38,7 @@ export class TargetUpdateComponent implements OnInit {
     if (this.target) {
       this.updateForm(this.target);
     }
-    this.editForm.get('targetHost')?.valueChanges.pipe(delay(3000)).subscribe(value => {
+    this.editForm.get('host')?.valueChanges.pipe(delay(3000)).subscribe(value => {
       console.log('checking');
     });
   }
@@ -46,7 +46,7 @@ export class TargetUpdateComponent implements OnInit {
   updateForm(target: ITarget): void {
     this.editForm.patchValue({
       id: target.id,
-      targetHost: target.targetHost,
+      host: target.host,
       port: target.port,
       job: target.job,
       description: target.description,
@@ -64,10 +64,10 @@ export class TargetUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): { targetHost?: string; description?: string; port: number, id: any; job: any } {
+  private createFromForm(): { host?: string; description?: string; port: number, id: any; job: any } {
     return {
       ...new Target(),
-      targetHost: this.editForm.get(['targetHost'])!.value,
+      host: this.editForm.get(['host'])!.value,
       port: this.editForm.get(['port'])!.value,
       id: this.editForm.get(['id'])!.value,
       job: this.editForm.get(['job'])!.value,

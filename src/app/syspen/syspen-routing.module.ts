@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {UserRouteAccessService} from '../core/auth/user-route-access-service';
+import {AlertComponent} from '../shared/alert/alert.component';
 import {AccessDeniedComponent} from '../shared/components/auth/access-denied/access-denied.component';
 import {ADMIN_ROLE, USER_ROLE} from '../shared/constants/global.constant';
 import {IframeViewComponent} from './iframe-view/iframe-view.component';
 import {TargetComponent} from './prom-target-management/target.component';
 import {SyspenComponent} from './syspen.component';
+import {AlertManagerComponent} from './alert-manager/alert-manager.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'crondata'},
@@ -26,6 +28,12 @@ const routes: Routes = [
       {
         path: 'metric-targets',
         component: TargetComponent,
+        canActivate: [UserRouteAccessService],
+        data: {authorities: [USER_ROLE, ADMIN_ROLE]}
+      },
+      {
+        path: 'alerts',
+        component: AlertManagerComponent,
         canActivate: [UserRouteAccessService],
         data: {authorities: [USER_ROLE, ADMIN_ROLE]}
       },

@@ -1,4 +1,6 @@
-export enum NotificationEnum {
-  OPENVAS = 'OPENVAS',
-  STRIPE = 'STRIPE',
+export enum NotificationSeverityEnum {
+  PAGE = 'page',
+  CRITICAL = 'critical',
+  WARNING = 'warning',
 }
+

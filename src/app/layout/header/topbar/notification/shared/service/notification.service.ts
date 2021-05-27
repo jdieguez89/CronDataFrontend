@@ -9,7 +9,7 @@ import {NotificationType} from '../type/notification.type';
   providedIn: 'root'
 })
 export class NotificationService {
-  private resourceUrl = SERVER_API_URL + 'api/notifications';
+  private resourceUrl = SERVER_API_URL + 'api/alerts';
 
   constructor(private http: HttpClient) {
   }

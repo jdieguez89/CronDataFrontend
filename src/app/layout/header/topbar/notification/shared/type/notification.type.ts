@@ -1,11 +1,12 @@
-import {NotificationEnum} from '../emun/notification.enum';
+import {NotificationSeverityEnum} from '../emun/notification.enum';
 
-export class NotificationType {
-  id?: string;
-  notifName?: string;
-  notifDescription?: string;
-  notifType?: NotificationEnum;
-  notifStatus?: string;
-  notifDate?: string;
-  notifUser?: string;
+export interface NotificationType {
+  description: string;
+  id: 0;
+  name: string;
+  readed: string;
+  receivedAt: Date;
+  severity: NotificationSeverityEnum;
+  status: string;
+  summary: string
 }
