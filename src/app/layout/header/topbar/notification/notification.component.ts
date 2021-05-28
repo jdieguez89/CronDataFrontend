@@ -45,6 +45,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     size: 15,
     sort: 'receivedAt,desc',
   };
+  interval: any;
 
   constructor(private sanitizer: DomSanitizer,
               private notificationService: NotificationService,
@@ -52,10 +53,14 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.interval = setInterval(() => {
+      this.getNotifications();
+    }, 20000);
     this.getNotifications();
   }
 
   ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   getNotifications() {

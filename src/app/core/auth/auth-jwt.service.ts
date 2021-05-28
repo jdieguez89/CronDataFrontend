@@ -5,6 +5,8 @@ import {map} from 'rxjs/operators';
 import {SERVER_API_URL} from '../../app.constants';
 import {Login} from '../login/login.model';
 import {TokenManagerService} from './token-manager.service';
+import {CookieService} from 'ngx-cookie-service';
+import {SESSION_AUTH_TOKEN} from '../../shared/constants/global.constant';
 
 type JwtToken = {
   id_token: string;
@@ -13,6 +15,7 @@ type JwtToken = {
 @Injectable({providedIn: 'root'})
 export class AuthServerProvider {
   constructor(private http: HttpClient,
+              private cookie: CookieService,
               private tokenManagerService: TokenManagerService) {
   }
 
@@ -30,6 +33,7 @@ export class AuthServerProvider {
 
   logout(): Promise<void> {
     return new Promise<void>(resolve => {
+      this.cookie.deleteAll();
       this.tokenManagerService.clearLocalToken();
       this.tokenManagerService.clearSessionToken();
       resolve();
@@ -38,6 +42,7 @@ export class AuthServerProvider {
 
   private authenticateSuccess(response: JwtToken, rememberMe: boolean): void {
     const jwt = response.id_token;
+    this.cookie.set(SESSION_AUTH_TOKEN, jwt);
     if (rememberMe) {
       this.tokenManagerService.setLocalToken(jwt);
     } else {
