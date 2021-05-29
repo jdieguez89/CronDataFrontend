@@ -41,7 +41,8 @@ export class UserMgmtUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    if (this.user.id !== null) {
+    console.log(this.user);
+    if (!this.user.id === undefined) {
       this.userService.update(this.user)
         .subscribe(response => this.onSaveSuccess(response, 'update'),
           (error) => this.onSaveError(error, 'update'));

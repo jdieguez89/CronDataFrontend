@@ -44,6 +44,12 @@ const routes: Routes = [
         data: {authorities: [USER_ROLE, ADMIN_ROLE]}
       },
       {
+        path: 'management',
+        loadChildren: () => import('./app-settings/settings.module').then(m => m.SettingsModule),
+        canActivate: [UserRouteAccessService],
+        data: {authorities: [USER_ROLE, ADMIN_ROLE]}
+      },
+      {
         path: 'admin',
         loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule),
         canActivate: [UserRouteAccessService],

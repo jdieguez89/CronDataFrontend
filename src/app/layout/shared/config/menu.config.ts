@@ -51,6 +51,15 @@ export class MenuConfig {
           authorities: [ADMIN_ROLE],
         },
         {
+          title: 'Manage settings',
+          root: true,
+          alignment: 'left',
+          toggle: 'click',
+          translate: 'app.management.title',
+          page: '/app/crondata/management/settings',
+          authorities: [ADMIN_ROLE],
+        },
+        {
           title: 'App checks',
           root: true,
           alignment: 'left',

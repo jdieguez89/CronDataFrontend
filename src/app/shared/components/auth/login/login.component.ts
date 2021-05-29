@@ -47,7 +47,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
   checkLogin(): void {
     this.accountService.identity(true).subscribe(value => {
       if (value) {
-        this.router.navigate(['/app']);
+        this.router.navigate(['/app/crondata/frame/grafana']);
       }
     });
   }

@@ -10,6 +10,7 @@ import {TargetComponent} from './prom-target-management/target.component';
 import {SyspenRoutingModule} from './syspen-routing.module';
 import {SyspenComponent} from './syspen.component';
 import {NgSelectModule} from '@ng-select/ng-select';
+import { AppSettingsComponent } from './app-settings/app-settings.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
     TargetComponent,
     TargetUpdateComponent,
     TargetDeleteDialogComponent,
-    AlertManagerComponent
+    AlertManagerComponent,
+    AppSettingsComponent
   ],
   imports: [
     SyspenSharedModule,

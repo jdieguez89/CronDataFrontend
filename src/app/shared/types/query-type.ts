@@ -1,7 +1,7 @@
 import {Operator} from '../enums/operator.enum';
 
 export class QueryType {
-  private query: string;
+  private query!: string;
 
   /**
    * Build a query based on url parameters

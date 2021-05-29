@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-start align-items-start flex-column">
+  <div class="alert alert-custom alert-notice alert-light-danger fade show mb-5 p-2 w-100" role="alert"
+       *ngIf="!checkConfigValid() && !loading">
+    <div class="alert-icon">
+      <i class="flaticon-warning"></i>
+    </div>
+    <div class="alert-text">Required param configuration must be set to save this section</div>
+  </div>
+
+  <div class="alert alert-custom alert-notice alert-light-warning fade show mb-5 p-2 w-100" role="alert"
+       *ngIf="configToSave.length>0 && checkConfigValid() && !loading">
+    <div class="alert-icon">
+      <i class="flaticon-warning"></i>
+    </div>
+    <div class="alert-text">Detect unsaved changes in configuration, do not forget save changes when you finish!</div>
+  </div>
+
+  <div class="w-100 d-flex justify-content-between align-items-center">
+    <h6 class="font-weight-semibold mb-2">{{section.section | titlecase}}</h6>
+    <div class="header-elements">
+      <button (click)="deleteConfig()"
+              *ngIf="allowDeleteSection"
+              class="btn text-danger btn-link mr-2 font-size-base span-small-icon">
+        <i class="icon-trash-alt"></i>
+        Delete config
+      </button>
+      <button (click)="saveConfig()"
+              [disabled]="!checkConfigValid() ||saving || configToSave.length === 0"
+              class="btn btn-link font-size-base span-small-icon">
+        <i
+          [ngClass]="saving?'icon-spinner2 spinner':'icon-cog3'"></i>
+        Save changes
+      </button>
+    </div>
+
+  </div>
+  <p *ngIf="section.description" class="mb-3 mt-3">{{section.description}}</p>
+  <div *ngIf="configs.length>0 && !loading"
+       class="d-flex justify-content-between align-items-center flex-wrap w-100">
+    <div *ngFor="let conf of configs" [ngClass]="conf.confParamDatatype === 'list'?'w-100 order-8':'w-30'"
+         class="form-group mb-4">
+      <label [for]="'sectionParam'+conf.id"
+             class="pb-1 span-small-icon d-flex justify-content-between align-items-center">
+      <span>
+        <i *ngIf="conf.confParamRequired"
+           [ngClass]="!(conf.confParamRequired &&
+             (conf.confParamValue === '' || conf.confParamValue === null || conf.confParamValue === undefined))
+         ?'icon-checkmark-circle text-success' :'text-danger icon-circle2'"
+           [ngbTooltip]="'This param is required'"
+           class="mr-1"
+           placement="auto"></i>
+        {{conf.confParamLarge}}
+      </span>
+        <span>
+          <i *ngIf="conf.confParamDescription"
+             [ngbTooltip]="conf.confParamDescription"
+             class="ml-2 text-primary icon-question3" placement="auto"></i>
+          <i *ngIf="conf.confParamRestartRequired"
+             class="ml-1 text-danger icon-notification2"
+             ngbTooltip="If you change this config an application reload will be necessary,
+          when we ready to reload a notice show up" placement="auto"></i>
+      </span>
+      </label>
+      <input (input)="save(conf.confParamValue,conf)"
+             *ngIf="conf.confParamDatatype !== 'bool' && conf.confParamDatatype !== 'list'"
+             [(ngModel)]="conf.confParamValue"
+             [id]="'sectionParam'+conf.id"
+             [required]="conf.confParamRequired"
+             [type]="conf.confParamDatatype" class="form-control">
+      <app-sys-toggle (toggleChange)="save($event === true?'true':'false',conf)"
+                      *ngIf="conf.confParamDatatype === 'bool'"
+                      [active]="conf.confParamValue ==='true'"
+                      [label]="'Enable/Disable param configuration'"></app-sys-toggle>
+
+      <textarea (input)="save(conf.confParamValue,conf)"
+                *ngIf="conf.confParamDatatype === 'list'"
+                [(ngModel)]="conf.confParamValue"
+                [id]="'sectionParam'+conf.id"
+                [required]="conf.confParamRequired"
+                class="form-control"
+                rows="4"></textarea>
+
+
+      <small *ngIf="conf.confParamRequired &&
+             (conf.confParamValue === '' || conf.confParamValue === null || conf.confParamValue === undefined)"
+             class="text-danger">
+        Param {{conf.confParamLarge}} is required
+      </small>
+    </div>
+  </div>
+  <div *ngIf="loading" class="w-100 d-flex justify-content-center align-items-center p-5 w-100">
+    <app-sys-spinner *ngIf="loading" [label]="'Loading configurations'" [loading]="loading"></app-sys-spinner>
+  </div>
+</div>
+

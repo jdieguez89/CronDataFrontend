@@ -145,14 +145,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
       centered: true
     });
     modalRef.componentInstance.user = user;
-    modalRef.result.then(
-      result => {
-        // Left blank intentionally, nothing to do here
-      },
-      reason => {
-        // Left blank intentionally, nothing to do here
-      }
-    );
+    modalRef.componentInstance.userDeleted.subscribe(() => this.loadAll());
   }
 
   searchUser($event: string) {
