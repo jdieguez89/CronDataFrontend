@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
   {
     path: 'app',
-    loadChildren: () => import('./syspen/syspen.module').then(m => m.SyspenModule),
+    loadChildren: () => import('./crondata/syspen.module').then(m => m.SyspenModule),
     canActivate: [UserRouteAccessService],
     data: {authorities: [USER_ROLE, ADMIN_ROLE]}
   },

@@ -1,20 +1,20 @@
-import {HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {NotificationType} from '../../../layout/header/topbar/notification/shared/type/notification.type';
+import {ITEMS_PER_PAGE} from '../../../shared/constants/pagination.constants';
+import {NotificationSeverityEnum} from '../../../layout/header/topbar/notification/shared/emun/notification.enum';
+import {SortByType} from '../../../shared/types/sort-by.type';
+import {NotificationService} from '../../../layout/header/topbar/notification/shared/service/notification.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {NotificationSeverityEnum} from '../../layout/header/topbar/notification/shared/emun/notification.enum';
-import {NotificationService} from '../../layout/header/topbar/notification/shared/service/notification.service';
-import {NotificationType} from '../../layout/header/topbar/notification/shared/type/notification.type';
-import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
-import {SortEvent} from '../../shared/directives/sortable/type/sort-event';
-import {SortByType} from '../../shared/types/sort-by.type';
-import {TimeFilterType} from '../../shared/types/time-filter.type';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {SortEvent} from '../../../shared/directives/sortable/type/sort-event';
+import {TimeFilterType} from '../../../shared/types/time-filter.type';
 
 @Component({
-  selector: 'app-alert-manager',
-  templateUrl: './alert-manager.component.html',
-  styleUrls: ['./alert-manager.component.scss']
+  selector: 'app-alert-history',
+  templateUrl: './alert-history.component.html',
+  styleUrls: ['./alert-history.component.scss']
 })
-export class AlertManagerComponent implements OnInit {
+export class AlertHistoryComponent implements OnInit {
   alerts?: NotificationType[];
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;

@@ -6,7 +6,7 @@ export class MenuConfig {
       self: {},
       items: [
         {
-          title: 'Grafana',
+          title: 'Dashboards',
           root: true,
           alignment: 'left',
           toggle: 'click',
@@ -15,22 +15,29 @@ export class MenuConfig {
           authorities: [ADMIN_ROLE, USER_ROLE],
         },
         {
-          title: 'Prometheus',
-          root: true,
-          alignment: 'left',
-          toggle: 'click',
-          translate: 'app.management.title',
-          page: '/app/crondata/frame/prometheus',
-          authorities: [ADMIN_ROLE, USER_ROLE],
-        },
-        {
-          title: 'Alerts',
+          title: 'Alert',
           root: true,
           alignment: 'left',
           toggle: 'click',
           translate: 'app.management.title',
           page: '/app/crondata/alerts',
           authorities: [ADMIN_ROLE],
+          submenu: [
+            {
+              page: '/app/crondata/alert/history',
+              icon: 'flaticon-time',
+              title: 'History',
+              translate: 'app.management.health.title',
+              authorities: [ADMIN_ROLE],
+            },
+            {
+              page: '/app/crondata/alert/management',
+              icon: 'flaticon-cogwheel',
+              title: 'Management',
+              translate: 'app.management.health.title',
+              authorities: [ADMIN_ROLE],
+            },
+          ]
         },
         {
           title: 'Manage targets',
