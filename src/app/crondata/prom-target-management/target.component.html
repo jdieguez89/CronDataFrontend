@@ -32,7 +32,7 @@
         <td>
           <span class="label label-lg label-inline"
                 [ngbTooltip]="target.health === targetHealthEnum.UP ? 'Target is connected '
-                :target.health === targetHealthEnum.DOWN?target.lastError:'Checking connection with target'"
+                :target.health === targetHealthEnum.DOWN?'Error while trying to connect to target':'Checking connection with target'"
                 [ngClass]="target.health===targetHealthEnum.UP?'label-light-success':
                 target.health===targetHealthEnum.DOWN?'label-light-danger':'label-light-warning'">
             {{target.health === targetHealthEnum.UP ? 'Connected' : target.health === targetHealthEnum.DOWN ? 'Down' : 'Checking'}}
