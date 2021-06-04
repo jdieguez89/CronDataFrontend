@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between align-items-center my-4">
+  <h4 class="text-dark font-weight-bold my-1">Manage rules</h4>
+  <div class="header-elements">
+    <button routerLink="/app/crondata/alert/frame/browser"
+            class="btn btn-primary">
+      <i class="flaticon-edit-1 icon-nm mr-2"></i> Open editor
+    </button>
+  </div>
+</div>
+<div class="card w-100 p-2 table-responsive mt-2" *ngFor="let group of groups">
+  <div class="d-flex justify-content-between align-items-center p-2">
+    <h6 [id]="group.name" class="text-break">
+      {{ group.name}}</h6>
+    <div class="d-flex justify-content-end align-items-center">
+      <h6>Interval: {{group.interval}}</h6>
+      <h6 class="ml-4">File: {{group.file.substr(group.file.lastIndexOf('/') + 1, group.file.length)}}</h6>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr class="font-weight-bold">
+      <td style="min-width: 70%">Rule</td>
+      <td>State</td>
+      <td>Last Evaluation</td>
+      <td>Evaluation Time</td>
+    </tr>
+    </thead>
+    <tbody *ngFor="let rule of group.rules">
+
+    <tr>
+      <td class="rule-cell" style="min-width: 70%" [innerHTML]="buildRule(rule)">
+      </td>
+      <td><span class="label label-lg label-inline"
+                [ngClass]="rule.state === ruleStateEnum.FIRING?'label-light-success'
+                :ruleStateEnum.INACTIVE?'label-light-warning'
+                :'label-light-danger'">{{rule.state}}</span>
+      </td>
+      <td>{{calcEvaluation(rule.lastEvaluation)}}</td>
+      <td>{{rule.evaluationTime + 'ms'}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

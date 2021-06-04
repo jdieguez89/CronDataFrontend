@@ -40,16 +40,7 @@
       <tr *ngFor="let alert of alerts; trackBy: trackIdentity">
         <td class="flex-nowrap text-nowrap">{{alert.summary}}</td>
         <td>
-          <div class="symbol symbol-20 symbol-light-primary mr-3"
-               [ngClass]="alert.severity === notificationTypeEnum.PAGE?'symbol-primary':
-               alert.severity === notificationTypeEnum.WARNING?'symbol-warning':'symbol-danger'">
-        						<span class="symbol-label">
-        							<span [inlineSVG]="alert.severity === notificationTypeEnum.PAGE?'assets/media/svg/icons/Text/Align-justify.svg':
-               alert.severity === notificationTypeEnum.WARNING?'assets/media/svg/icons/Code/Info-circle.svg'
-               :'assets/media/svg/icons/General/Shield-disabled.svg'"
-                            class="svg-icon svg-icon-medium svg-icon-white p-3"></span>
-                 </span>
-          </div>
+          <app-alert-severity [severity]="alert.severity"></app-alert-severity>
         </td>
         <td class="flex-nowrap text-nowrap">{{alert.receivedAt | date:'short'}}</td>
         <td>{{alert.description}}</td>

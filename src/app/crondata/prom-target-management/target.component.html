@@ -19,6 +19,7 @@
     <table class="table">
       <thead>
       <tr>
+        <th><span>Status</span></th>
         <th><span>Host</span></th>
         <th><span>Port</span></th>
         <th><span>Job</span></th>
@@ -28,6 +29,16 @@
       </thead>
       <tbody *ngIf="targets && targets.length>0 && !loading">
       <tr *ngFor="let target of targets; trackBy: trackIdentity">
+        <td>
+          <span class="label label-lg label-inline"
+                [ngbTooltip]="target.health === targetHealthEnum.UP ? 'Target is connected '
+                :target.health === targetHealthEnum.DOWN?target.lastError:'Checking connection with target'"
+                [ngClass]="target.health===targetHealthEnum.UP?'label-light-success':
+                target.health===targetHealthEnum.DOWN?'label-light-danger':'label-light-warning'">
+            {{target.health === targetHealthEnum.UP ? 'Connected' : target.health === targetHealthEnum.DOWN ? 'Down' : 'Checking'}}
+          </span>
+        </td>
+
         <td>{{target.host}}</td>
         <td>{{target.port}}</td>
         <td>{{target.job}}</td>

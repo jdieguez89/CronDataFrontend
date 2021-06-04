@@ -6,6 +6,13 @@ export interface RuleAlert {
   activeAt: Date;
   annotations: RuleAnnotationType;
   labels: RuleLabelsType;
-  state: RuleStateEnum,
-  value: 1e+00
+  state: RuleStateEnum;
+  value: any;
+  name: string;
+  query: string;
+  duration: number;
+  health: string;
+  evaluationTime: number;
+  lastEvaluation: Date;
+  type: string;
 }

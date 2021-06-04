@@ -2,13 +2,16 @@ import {HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {ITarget, Target} from './target.model';
-
+import {SysToasrtService} from '../../shared/alert/sys-toasrt.service';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 import {SortEvent} from '../../shared/directives/sortable/type/sort-event';
+import {PromQueryTargetsService} from '../../shared/services/prometheus/prom-query-targets.service';
+import {ActiveTargetsType} from '../../shared/types/prometheus/targets/active-targets.type';
+import {TargetHealthEnum} from '../../shared/types/prometheus/targets/enums/target-health.enum';
 import {SortByType} from '../../shared/types/sort-by.type';
 import {TargetDeleteDialogComponent} from './target-delete-dialog.component';
 import {TargetUpdateComponent} from './target-update.component';
+import {ITarget, Target} from './target.model';
 import {TargetService} from './target.service';
 
 @Component({
@@ -42,24 +45,43 @@ export class TargetComponent implements OnInit, OnDestroy {
     }
   ];
   loading = true;
+  targetHealthEnum = TargetHealthEnum;
+  interval: any;
 
   constructor(
-    protected targetService: TargetService,
-    protected modalService: NgbModal
+    private targetService: TargetService,
+    private modalService: NgbModal,
+    private sysToasrtService: SysToasrtService,
+    private promQueryTargetsService: PromQueryTargetsService
   ) {
+  }
+
+
+  ngOnInit(): void {
+    this.getTargets();
+    this.interval = setInterval(() => this.getPromTargets(), 10000);
   }
 
   getTargets(): void {
     this.targetService
       .query(this.request)
       .subscribe(
-        (res: HttpResponse<ITarget[]>) => this.onSuccess(res.body, res.headers),
+        (res: HttpResponse<ITarget[]>) => {
+          if (res.body) {
+            this.onSuccess(res.body, res.headers);
+          }
+        },
         () => this.onError()
       );
   }
 
-  ngOnInit(): void {
-    this.getTargets();
+  getPromTargets() {
+    this.promQueryTargetsService.query().subscribe(response => {
+      if (response.body) {
+        this.mergeTargetConfig(response.body.data.activeTargets);
+      }
+    }, error => this.sysToasrtService.showError('Metric collector is down',
+      'Unable to connect with metric collector'));
   }
 
   onSort($event: SortEvent) {
@@ -69,6 +91,7 @@ export class TargetComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   trackId(index: number, item: ITarget): number {
@@ -77,7 +100,8 @@ export class TargetComponent implements OnInit, OnDestroy {
   }
 
   delete(target: ITarget): void {
-    const modalRef = this.modalService.open(TargetDeleteDialogComponent, {centered: true, size: 'lg', backdrop: 'static'});
+    const modalRef = this.modalService.open(TargetDeleteDialogComponent,
+      {centered: true, size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.target = target;
     modalRef.componentInstance.targetDeleted.subscribe(() => {
       this.getTargets();
@@ -85,10 +109,27 @@ export class TargetComponent implements OnInit, OnDestroy {
   }
 
 
-  protected onSuccess(data: ITarget[] | null, headers: HttpHeaders): void {
+  protected onSuccess(data: ITarget[], headers: HttpHeaders): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
-    this.targets = data || [];
+    this.targets = data;
     this.loading = false;
+  }
+
+  mergeTargetConfig(data: ActiveTargetsType[]) {
+    // @ts-ignore
+    for (const target of this.targets) {
+      const index = data?.findIndex(value => value.scrapeUrl.includes(this.buildUrl(target))
+        && value.labels.job === target.job);
+      target.health = data[index].health;
+      target.lastError = data[index].lastError;
+    }
+    if (this.targets?.findIndex(value => value.health === this.targetHealthEnum.DOWN) !== -1) {
+      this.sysToasrtService.showError('Target down', 'One or more targets are down');
+    }
+  }
+
+  buildUrl(target: ITarget): string {
+    return 'http://' + target.host + ':' + target.port;
   }
 
   protected onError(): void {
@@ -98,7 +139,7 @@ export class TargetComponent implements OnInit, OnDestroy {
   createTarget() {
     const modalCreate = this.modalService.open(TargetUpdateComponent, {centered: true});
     modalCreate.componentInstance.targetUpdated.subscribe(() => {
-      this.getTargets();
+      this.getPromTargets();
     });
   }
 

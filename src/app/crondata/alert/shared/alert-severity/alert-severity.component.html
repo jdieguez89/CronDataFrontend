@@ -1,0 +1,10 @@
+<div class="symbol symbol-20 symbol-light-primary mr-3"
+     [ngClass]="severity === notificationTypeEnum.PAGE?'symbol-primary':
+               severity === notificationTypeEnum.WARNING?'symbol-warning':'symbol-danger'">
+        						<span class="symbol-label">
+        							<span [inlineSVG]="severity === notificationTypeEnum.PAGE?'assets/media/svg/icons/Text/Align-justify.svg':
+               severity === notificationTypeEnum.WARNING?'assets/media/svg/icons/Code/Info-circle.svg'
+               :'assets/media/svg/icons/General/Shield-disabled.svg'"
+                            class="svg-icon svg-icon-medium svg-icon-white p-3"></span>
+                 </span>
+</div>

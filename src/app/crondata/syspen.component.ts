@@ -96,7 +96,6 @@ export class SyspenComponent implements OnInit, OnDestroy {
 
   setLayoutPadding() {
     if (this.router.url.includes('/frame/')) {
-      console.log('IN FRAME LAYOUT');
       this.contentContainerClasses = 'container-fluid p-0 m-0';
     } else {
       this.contentContainerClasses = this.htmlClassService.getClasses('content_container', true).toString();

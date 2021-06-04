@@ -8,4 +8,5 @@ export const VERSION = environment.VERSION;
 export const SERVER_API_URL = environment.SERVER_API_URL;
 export const GRAFANA_URL = environment.GRAFANA_URL;
 export const PROMETHEUS_URL = environment.PROMETHEUS_URL;
+export const FILEBROWSER_URL = environment.FILEBROWSER_URL;
 export const BUILD_TIMESTAMP = environment.BUILD_TIMESTAMP;
