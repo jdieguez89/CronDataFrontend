@@ -19,9 +19,9 @@ export class CronIframeComponent implements OnInit {
     window.addEventListener('resize', (event) => {
       this.iHeight = window.innerHeight - 65;
     });
-    this.activatedRoute.params.subscribe(value => {
-      this.urlIframe = value.frame === 'grafana' ? GRAFANA_URL : PROMETHEUS_URL;
-    });
+    // this.activatedRoute.params.subscribe(value => {
+    //   this.urlIframe = value.frame === 'grafana' ? GRAFANA_URL : PROMETHEUS_URL;
+    // });
     console.log(this.iHeight);
   }
 }

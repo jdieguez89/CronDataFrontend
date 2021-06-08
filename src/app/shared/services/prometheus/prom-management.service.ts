@@ -6,7 +6,7 @@ import {PROMETHEUS_URL} from '../../../app.constants';
 @Injectable({
   providedIn: 'root'
 })
-export class PromQueryRulesService {
+export class PromManagementService {
   public resourceUrl = PROMETHEUS_URL + '-/';
 
   constructor(private http: HttpClient) {
@@ -22,7 +22,7 @@ export class PromQueryRulesService {
   }
 
   reload(): Observable<any> {
-    return this.http.post(this.resourceUrl + 'ready', {observe: 'response', responseType: 'text'});
+    return this.http.post(this.resourceUrl + 'reload', {observe: 'response', responseType: 'text'});
   }
 
 

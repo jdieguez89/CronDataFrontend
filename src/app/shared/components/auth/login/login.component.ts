@@ -49,7 +49,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
       if (value) {
         this.router.navigate(['/app/crondata/frame/grafana']);
       }
-    });
+    }, error => console.log(error));
   }
 
   cancel(): void {

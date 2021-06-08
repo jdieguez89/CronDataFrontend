@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  SERVER_API_URL: 'http://' + window.location.hostname + ':8080/',
+  SERVER_API_URL: 'http://localhost:8080/',
   BUILD_TIMESTAMP: new Date().getTime(),
-  GRAFANA_URL: 'http://' + window.location.hostname + ':3000/',
-  PROMETHEUS_URL: 'http://' + window.location.hostname + ':9090/',
+  GRAFANA_URL: 'http://' + window.location.host + ':3000/',
+  PROMETHEUS_URL: 'http://' + window.location.host + ':9090/',
   FILEBROWSER_URL: 'http://' + window.location.host + ':8081/',
   SESSION_AUTH_TOKEN: window.location.host.split(':')[0].toLocaleUpperCase(),
   DEBUG_INFO_ENABLED: true,
