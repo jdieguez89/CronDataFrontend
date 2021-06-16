@@ -36,6 +36,12 @@ const routes: Routes = [
         data: {authorities: [USER_ROLE, ADMIN_ROLE]}
       },
       {
+        path: 'application',
+        loadChildren: () => import('./cron-applications/cron-applications.module').then(m => m.CronApplicationsModule),
+        canActivate: [UserRouteAccessService],
+        data: {authorities: [USER_ROLE, ADMIN_ROLE]}
+      },
+      {
         path: 'account',
         loadChildren: () => import('../account/account.module').then(m => m.AccountModule),
         canActivate: [UserRouteAccessService],
