@@ -56,6 +56,15 @@ export class MenuConfig {
           authorities: [ADMIN_ROLE],
         },
         {
+          title: 'Applications',
+          root: true,
+          alignment: 'left',
+          toggle: 'click',
+          translate: 'app.management.title',
+          page: '/app/crondata/application/install',
+          authorities: [ADMIN_ROLE, USER_ROLE],
+        },
+        {
           title: 'Manage users',
           root: true,
           alignment: 'left',
