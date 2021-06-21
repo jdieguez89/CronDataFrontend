@@ -1,8 +1,26 @@
 <div class="d-flex justify-content-between align-items-center my-4">
   <h4 class="text-dark font-weight-bold my-1">Applications</h4>
+  <div class="filters d-flex">
+    <app-sys-search-input (searchFor)="searchApp($event)"
+                          [searching]="searchingApp"
+                          placeholder="Search application">
+    </app-sys-search-input>
+    <ng-select [searchable]="true"
+               [items]="categories"
+               [loading]="!categories"
+               [loadingText]="'Loading categories'"
+               placeholder="Category"
+               (change)="onFilterByCategory($event)"
+               (clear)="clearSelect()"
+               bindLabel="categoryName"
+               bindValue="id"
+               class="ml-3"
+               style="min-width: 200px"
+               [clearable]="true"></ng-select>
+  </div>
 </div>
-<div class="row w-100">
-  <div class="col-xl-4" *ngFor="let app of applications">
+<div class="row">
+  <div class="col-xl-3" *ngFor="let app of applications">
     <app-cron-app-card [app]="app"></app-cron-app-card>
   </div>
 </div>

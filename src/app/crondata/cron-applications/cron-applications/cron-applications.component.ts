@@ -1,6 +1,8 @@
 import {HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
+import {AppCategoryService} from '../shared/services/app-category.service';
 import {ApplicationService} from '../shared/services/applications.service';
+import {AppCategoryType} from '../shared/type/app-category.type';
 import {ApplicationType} from '../shared/type/application.type';
 
 @Component({
@@ -9,15 +11,33 @@ import {ApplicationType} from '../shared/type/application.type';
   styleUrls: ['./cron-applications.component.scss']
 })
 export class CronApplicationsComponent implements OnInit {
-  private request: any;
+  request = {
+    page: 0,
+    size: 100,
+    'appName.contains': null,
+    'appCategoryId.equals': null
+  };
   loading = true;
   applications: ApplicationType[] = [];
+  searchingApp = false;
+  categories!: AppCategoryType[];
 
-  constructor(private applicationService: ApplicationService) {
+  constructor(private applicationService: ApplicationService,
+              private appCategoryService: AppCategoryService) {
   }
 
   ngOnInit(): void {
     this.getApplications();
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.appCategoryService.query({page: 0, size: 100}).subscribe(response => {
+      if (response.body) {
+        this.categories = response.body;
+      }
+    });
+
   }
 
   getApplications() {
@@ -41,4 +61,21 @@ export class CronApplicationsComponent implements OnInit {
     // this.ngbPaginationPage = this.page ?? 1;
   }
 
+  searchApp($event: any) {
+    this.request['appName.contains'] = $event;
+    this.request.page = 0;
+    this.getApplications();
+  }
+
+  onFilterByCategory($event: any) {
+    this.request['appCategoryId.equals'] = $event.id;
+    this.request.page = 0;
+    this.getApplications();
+  }
+
+  clearSelect() {
+    this.request['appCategoryId.equals'] = null;
+    this.request.page = 0;
+    this.getApplications();
+  }
 }

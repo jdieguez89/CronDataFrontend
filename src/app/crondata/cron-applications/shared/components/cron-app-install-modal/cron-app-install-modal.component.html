@@ -1,0 +1,53 @@
+<app-modal-header [name]="'Activate module'"></app-modal-header>
+<div class="container-fluid p-5">
+  <div class="d-flex align-items-center mb-6">
+    <div class="symbol symbol-25 mr-3"><span class="symbol-label bg-light-light">
+      <img alt="" height="25px" width="25px" class="align-self-center"
+           [src]="app.appIcon"></span>
+    </div>
+    <h4 class="text-dark font-weight-bolder font-size-h4 m-0"> {{app.appName}} </h4>
+
+  </div>
+  <p>{{app.appDescription}}</p>
+  <div class="w-100">
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="label label-xl label-primary mr-2">1</span>
+      <h4 class="m-0">Install components</h4>
+    </div>
+    <p class="ml-11 mt-3">Please follow the steps listed in this <a [href]="app.installationLink"
+                                                                    target="_blank"
+                                                                    class="text-primary font-weight-bold">link</a>
+      to start the
+      installation module</p>
+  </div>
+
+  <div class="w-100 mt-5">
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="label label-xl label-primary mr-2">2</span>
+      <h4 class="m-0">Add Targets to monitor</h4>
+    </div>
+    <p class="ml-11 mt-3">Add new target <a (click)="addTarget()" class="text-primary font-weight-bold">here</a></p>
+  </div>
+
+  <div class="w-100 mt-5">
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="label label-xl label-primary mr-2">3</span>
+      <h4 class="m-0">Activate module</h4>
+    </div>
+    <p class="ml-11 mt-3">Activate the module by clicking the "Activate" button below</p>
+  </div>
+
+  <div class="button-container d-flex justify-content-end mt-4">
+    <button (click)="activeModal.close()" class="btn btn btn-light-primary mr-3">
+      <i class="flaticon-close"></i>&nbsp;
+      Cancel
+    </button>
+    <button (click)="activate()"
+            class="btn btn-primary"
+            appButtonLoader [loading]="isSaving"
+            classIcon="flaticon2-layers">
+      Activate
+    </button>
+  </div>
+</div>
+
