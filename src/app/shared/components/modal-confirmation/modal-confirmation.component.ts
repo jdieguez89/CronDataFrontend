@@ -7,11 +7,11 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-confirmation.component.scss']
 })
 export class ModalConfirmationComponent implements OnInit {
-  header: string;
-  message: string;
-  confirmBtnText: string;
-  confirmBtnIcon: string;
-  confirmBtnType: 'delete' | 'default';
+  header!: string;
+  message!: string;
+  confirmBtnText!: string;
+  confirmBtnIcon!: string;
+  confirmBtnType: 'delete' | 'default' = 'delete';
 
   constructor(private activeModal: NgbActiveModal) {
   }

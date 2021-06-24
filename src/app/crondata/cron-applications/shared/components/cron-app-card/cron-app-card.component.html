@@ -29,9 +29,17 @@
     <!--begin::Team-->
     <div class="d-flex align-items-center">
       <button class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3" (click)="activate()"
+              *ngIf="!app.isInstalled;else deactivate"
               [disabled]="app.isInstalled">
         {{app.isInstalled ? 'Activated' : 'Activate module'}}
       </button>
+      <ng-template #deactivate>
+        <button class="btn btn-danger btn-shadow-hover font-weight-bolder w-100 py-3"
+                (click)="deactivateModule(app)"
+                [disabled]="!app.isInstalled">
+          {{app.isInstalled ? 'Deactivate module' : 'Activate module'}}
+        </button>
+      </ng-template>
     </div>
     <!--end::Team-->
   </div>

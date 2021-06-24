@@ -5,7 +5,7 @@
 import {environment} from '../environments/environment';
 
 export const VERSION = environment.VERSION;
-export const SERVER_API_URL = environment.SERVER_API_URL;
+export const SERVER_API_URL = environment.SERVER_API_URL + environment.SERVER_API_CONTEXT;
 export const GRAFANA_URL = environment.GRAFANA_URL;
 export const PROMETHEUS_URL = environment.PROMETHEUS_URL;
 export const FILEBROWSER_URL = environment.FILEBROWSER_URL;

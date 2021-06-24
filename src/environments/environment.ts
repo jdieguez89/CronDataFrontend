@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   SERVER_API_URL: 'http://localhost:8080/',
+  SERVER_API_CONTEXT: '',
   BUILD_TIMESTAMP: new Date().getTime(),
   GRAFANA_URL: 'http://' + window.location.host + ':3000/',
   PROMETHEUS_URL: 'http://' + window.location.host + ':9090/',

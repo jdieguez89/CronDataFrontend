@@ -1,7 +1,7 @@
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {PROMETHEUS_URL, SERVER_API_URL} from '../../../app.constants';
+import {PROMETHEUS_URL} from '../../../app.constants';
 import {TokenManagerService} from '../../../core/auth/token-manager.service';
 import {RuleResponseType} from '../../types/prometheus/rules/rule-response.type';
 import {createRequestOption} from '../../util/request-util';
@@ -10,7 +10,7 @@ import {createRequestOption} from '../../util/request-util';
   providedIn: 'root'
 })
 export class PromQueryRulesService {
-  public resourceUrl = SERVER_API_URL + 'api/prometheus/rules';
+  public resourceUrl = PROMETHEUS_URL + 'api/prometheus/rules';
   // headers: HttpHeaders;
 
   constructor(private http: HttpClient, private tokenService: TokenManagerService) {

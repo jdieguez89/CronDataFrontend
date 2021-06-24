@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SERVER_API_URL} from '../../../../app.constants';
 import {createRequestOption} from '../../../../shared/util/request-util';
-import {AppCategoryType} from '../type/app-category.type';
 import {ApplicationType} from '../type/application.type';
 
 
@@ -17,12 +16,20 @@ export class ApplicationService {
   constructor(protected http: HttpClient) {
   }
 
-  create(target: AppCategoryType): Observable<EntityResponseType> {
+  create(target: ApplicationType): Observable<EntityResponseType> {
     return this.http.post<ApplicationType>(this.resourceUrl, target, {observe: 'response'});
   }
 
-  update(target: AppCategoryType): Observable<EntityResponseType> {
+  update(target: ApplicationType): Observable<EntityResponseType> {
     return this.http.put<ApplicationType>(this.resourceUrl, target, {observe: 'response'});
+  }
+
+  activate(target: ApplicationType): Observable<EntityResponseType> {
+    return this.http.post<ApplicationType>(this.resourceUrl + '/activate', target, {observe: 'response'});
+  }
+
+  deactivate(app: ApplicationType): Observable<EntityResponseType> {
+    return this.http.post<ApplicationType>(this.resourceUrl + '/deactivate', app, {observe: 'response'});
   }
 
   find(id: number): Observable<EntityResponseType> {

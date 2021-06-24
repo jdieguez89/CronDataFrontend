@@ -21,6 +21,6 @@
 </div>
 <div class="row">
   <div class="col-xl-3" *ngFor="let app of applications">
-    <app-cron-app-card [app]="app"></app-cron-app-card>
+    <app-cron-app-card [app]="app" (refresh)="getApplications()"></app-cron-app-card>
   </div>
 </div>
