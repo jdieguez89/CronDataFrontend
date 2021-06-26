@@ -19,17 +19,17 @@
     <table class="table">
       <thead>
       <tr>
-        <th><span>Status</span></th>
-        <th><span>Host</span></th>
-        <th><span>Port</span></th>
-        <th><span>Job</span></th>
+        <th style="min-width: 110px"><span>Status</span></th>
+        <th style="min-width: 200px"><span>Host</span></th>
+        <th style="min-width: 110px"><span>Port</span></th>
+        <th style="min-width: 200px"><span>Job</span></th>
         <th><span>Description</span></th>
         <th></th>
       </tr>
       </thead>
       <tbody *ngIf="targets && targets.length>0 && !loading">
       <tr *ngFor="let target of targets; trackBy: trackIdentity">
-        <td>
+        <td style="min-width: 110px">
           <span class="label label-lg label-inline"
                 [ngbTooltip]="target.health === targetHealthEnum.UP ? 'Target is connected '
                 :target.health === targetHealthEnum.DOWN?'Error while trying to connect to target':'Checking connection with target'"

@@ -16,7 +16,7 @@ export class CronApplicationsComponent implements OnInit {
     size: 100,
     'appName.contains': null,
     'appCategoryId.equals': null,
-    sort: 'id,asc'
+    sort: 'appCategoryId,asc'
   };
   loading = true;
   applications: ApplicationType[] = [];

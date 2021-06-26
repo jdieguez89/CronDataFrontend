@@ -23,7 +23,7 @@ export class TargetUpdateComponent implements OnInit {
     id: [],
     host: ['', [Validators.required]],
     job: [null, [Validators.required]],
-    port: ['', [Validators.required]],
+    port: [],
     description: []
   });
 

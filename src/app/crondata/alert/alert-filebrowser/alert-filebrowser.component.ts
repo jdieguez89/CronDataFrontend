@@ -21,15 +21,7 @@ export class AlertFilebrowserComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.promManagementService.reload().subscribe(() => {
-      this.promManagementService.getHealth().subscribe(response => {
-        if (response.body) {
-          if (!response.body.toLowerCase().includes('up')) {
-            this.toastService.showError('Error reloading rules', response.body);
-          } else {
-            this.toastService.showSuccess('Configuration reloaded');
-          }
-        }
-      });
+      this.toastService.showSuccess('Configuration reloaded');
     });
   }
 
