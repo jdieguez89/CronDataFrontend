@@ -1,39 +1,47 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {PromQueryRulesService} from '../../../shared/services/prometheus/prom-query-rules.service';
 import {RuleStateEnum} from '../../../shared/types/prometheus/rules/enums/rule-state.enum';
 import {RuleAlert} from '../../../shared/types/prometheus/rules/rule-alert';
 import {RuleGroupsType} from '../../../shared/types/prometheus/rules/rule-groups.type';
+import {SysToasrtService} from '../../../shared/alert/sys-toasrt.service';
 
 @Component({
   selector: 'app-alert-manager',
   templateUrl: './alert-manager.component.html',
   styleUrls: ['./alert-manager.component.scss']
 })
-export class AlertManagerComponent implements OnInit, OnDestroy {
+export class AlertManagerComponent implements OnInit, AfterViewChecked, OnDestroy {
   groups!: RuleGroupsType[];
   ruleStateEnum = RuleStateEnum;
   interval: any;
 
-  constructor(private promQueryRulesService: PromQueryRulesService) {
+  constructor(private promQueryRulesService: PromQueryRulesService,
+              private cdr: ChangeDetectorRef,
+              private sysToasrtService: SysToasrtService) {
   }
 
   ngOnInit() {
     this.getRules();
-    this.interval = setInterval(() => this.getRules(), 10000);
+    this.interval = setInterval(() => this.getRules(), 30000);
   }
 
   ngOnDestroy() {
     clearInterval(this.interval);
   }
 
+  ngAfterViewChecked() {
+    this.cdr.markForCheck();
+    this.cdr.detectChanges();
+  }
+
   getRules() {
     this.promQueryRulesService.query().subscribe(response => {
       if (response.body) {
         this.groups = response.body.data.groups;
-        console.log(this.groups);
       }
-    });
+    }, () => this.sysToasrtService.showError('Error connecting to metric manager',
+      'Han error occur while trying to connect to metric manager datasource'));
   }
 
   openEditor() {

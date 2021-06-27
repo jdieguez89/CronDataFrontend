@@ -21,8 +21,9 @@ export class AlertFilebrowserComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.promManagementService.reload().subscribe(() => {
-      this.toastService.showSuccess('Configuration reloaded');
-    });
+      this.toastService.showSuccessBottom('Configuration reloaded');
+    }, () => this.toastService.showError('Error reloading configuration',
+      'Han error occur while trying to reload metric manager datasource'));
   }
 
 }

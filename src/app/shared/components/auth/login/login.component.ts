@@ -1,12 +1,14 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PasswordResetInitComponent} from '..';
+import {AccountService} from '../../../../core/auth/account.service';
 import {LoginService} from '../../../../core/login/login.service';
+import {ApplicationService} from '../../../../crondata/cron-applications/shared/services/applications.service';
 import {SysToasrtService} from '../../../alert/sys-toasrt.service';
 import {SysHttpResponseErrorService} from '../../../services/sys-http-response-error.service';
-import {AccountService} from '../../../../core/auth/account.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +33,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
               private errorService: SysHttpResponseErrorService,
               private modalService: NgbModal,
               private accountService: AccountService,
+              private applicationService: ApplicationService,
               private fb: FormBuilder) {
   }
 
@@ -74,7 +77,9 @@ export class LoginComponent implements AfterViewInit, OnInit {
         this.authenticationError = false;
         this.loading = false;
         // this.activeModal.close();
-        this.router.navigate(['/app/crondata/frame/grafana']);
+        this.navigateOnLogin().subscribe(url => {
+          this.router.navigate([url]);
+        });
         // if (
         //   this.router.url === '/account/register' ||
         //   this.router.url.startsWith('/account/activate') ||
@@ -91,6 +96,20 @@ export class LoginComponent implements AfterViewInit, OnInit {
       }
     );
   }
+
+
+  navigateOnLogin(): Observable<string> {
+    return new Observable<string>(subscriber => {
+      this.applicationService.query({'isInstalled.equals': true}).subscribe(response => {
+        if (response.body && response.body?.length === 0) {
+          subscriber.next('/app/crondata/application/install');
+        } else {
+          subscriber.next('/app/crondata/frame/grafana');
+        }
+      });
+    });
+  }
+
 
   requestResetPassword(): void {
     // this.activeModal.dismiss('to state requestReset');

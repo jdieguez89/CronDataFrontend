@@ -45,7 +45,7 @@ export class UserRouteAccessService implements CanActivate {
           if (this.accountService.isAuthenticated()) {
             this.router.navigate(['/']);
           } else {
-            this.router.navigate(['/auth/login']);
+            this.router.navigate(['/auth']);
           }
           this.showError();
           return false;
@@ -53,7 +53,7 @@ export class UserRouteAccessService implements CanActivate {
 
         // this.stateStorageService.storeUrl(url);
         this.showError();
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/auth']);
         return false;
       })
     );

@@ -1,4 +1,5 @@
 export enum TargetHealthEnum {
   UP = 'up',
-  DOWN = 'down'
+  DOWN = 'down',
+  UNKNOWN = 'unknown'
 }

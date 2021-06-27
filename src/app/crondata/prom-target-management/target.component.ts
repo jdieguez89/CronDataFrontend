@@ -118,10 +118,17 @@ export class TargetComponent implements OnInit, OnDestroy {
   mergeTargetConfig(data: ActiveTargetsType[]) {
     // @ts-ignore
     for (const target of this.targets) {
-      const index = data?.findIndex(value => value.scrapeUrl.includes(this.buildUrl(target))
-        && value.labels.job === target.job);
-      target.health = data[index].health;
-      target.lastError = data[index].lastError;
+      const instance = this.buildUrl(target);
+      const job = target.job ? target.job : 'null';
+      const index = data?.findIndex(value => value.labels.instance.includes(instance)
+        && value.labels.job.includes(job));
+      if (index !== -1) {
+        target.health = data[index].health;
+        target.lastError = data[index].lastError;
+      } else {
+        target.health = TargetHealthEnum.UNKNOWN;
+        target.lastError = 'Unable to relate target';
+      }
     }
     if (this.targets?.findIndex(value => value.health === this.targetHealthEnum.DOWN) !== -1) {
       this.sysToasrtService.showError('Target down', 'One or more targets are down');
@@ -129,7 +136,7 @@ export class TargetComponent implements OnInit, OnDestroy {
   }
 
   buildUrl(target: ITarget): string {
-    return 'http://' + target.host + ':' + target.port;
+    return target.host + ':' + (target.port ? target.port : '80');
   }
 
   protected onError(): void {
@@ -165,5 +172,44 @@ export class TargetComponent implements OnInit, OnDestroy {
   loadPage($event: number) {
     this.request.page = $event - 1;
     this.getTargets();
+  }
+
+  healthTooltip(target: Target & ITarget): string {
+    switch (target.health) {
+      case TargetHealthEnum.DOWN:
+        return 'Error while trying to connect to target';
+      case TargetHealthEnum.UP:
+        return 'Target is connected ';
+      case TargetHealthEnum.UNKNOWN:
+        return 'Unable to related target';
+      default:
+        return 'Checking connection with target';
+    }
+  }
+
+  healthClass(target: Target & ITarget): string {
+    switch (target.health) {
+      case TargetHealthEnum.DOWN:
+        return 'label-light-danger';
+      case TargetHealthEnum.UP:
+        return 'label-light-success';
+      case TargetHealthEnum.UNKNOWN:
+        return 'label-light-info';
+      default:
+        return 'label-light-warning';
+    }
+  }
+
+  getHealthLabel(target: Target & ITarget) {
+    switch (target.health) {
+      case TargetHealthEnum.DOWN:
+        return 'Disconnected';
+      case TargetHealthEnum.UP:
+        return 'Connected';
+      case TargetHealthEnum.UNKNOWN:
+        return 'Unknown';
+      default:
+        return 'Checking';
+    }
   }
 }
