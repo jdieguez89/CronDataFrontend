@@ -20,7 +20,6 @@ export class MenuConfig {
           alignment: 'left',
           toggle: 'click',
           translate: 'app.management.title',
-          page: '/app/crondata/alerts',
           authorities: [ADMIN_ROLE],
           submenu: [
             {
@@ -47,15 +46,6 @@ export class MenuConfig {
           ]
         },
         {
-          title: 'Manage targets',
-          root: true,
-          alignment: 'left',
-          toggle: 'click',
-          translate: 'app.management.title',
-          page: '/app/crondata/metric-targets',
-          authorities: [ADMIN_ROLE],
-        },
-        {
           title: 'Applications',
           root: true,
           alignment: 'left',
@@ -65,31 +55,50 @@ export class MenuConfig {
           authorities: [ADMIN_ROLE, USER_ROLE],
         },
         {
-          title: 'Manage users',
+          title: 'Targets',
           root: true,
           alignment: 'left',
           toggle: 'click',
           translate: 'app.management.title',
-          page: '/app/crondata/admin/user',
+          page: '/app/crondata/metric-targets',
           authorities: [ADMIN_ROLE],
         },
         {
-          title: 'Manage settings',
-          root: true,
-          alignment: 'left',
-          toggle: 'click',
-          translate: 'app.management.title',
-          page: '/app/crondata/management/settings',
-          authorities: [ADMIN_ROLE],
-        },
-        {
-          title: 'App checks',
+          title: 'Management',
           root: true,
           alignment: 'left',
           toggle: 'click',
           translate: 'app.management.title',
           authorities: [ADMIN_ROLE],
           submenu: [
+            {
+              title: 'Manage users',
+              root: true,
+              alignment: 'left',
+              toggle: 'click',
+              icon: 'flaticon-user-settings',
+              translate: 'app.management.title',
+              page: '/app/crondata/admin/user',
+              authorities: [ADMIN_ROLE],
+            },
+            {
+              title: 'Manage settings',
+              root: true,
+              alignment: 'left',
+              toggle: 'click',
+              translate: 'app.management.title',
+              icon: 'flaticon-settings',
+              page: '/app/crondata/management/settings',
+              authorities: [ADMIN_ROLE],
+            },
+            // {
+            //   title: 'App checks',
+            //   root: true,
+            //   alignment: 'left',
+            //   toggle: 'click',
+            //   translate: 'app.management.title',
+            //   authorities: [ADMIN_ROLE],
+            //   submenu: [
             {
               page: '/app/crondata/check/health',
               icon: 'flaticon-analytics',
@@ -119,7 +128,8 @@ export class MenuConfig {
               authorities: [ADMIN_ROLE],
             }
           ]
-        },
+          // }]
+        }
       ]
     },
     aside: {

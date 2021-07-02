@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {HealthDetails, HealthKey} from '../health-checks.service';
 
@@ -7,10 +7,14 @@ import {HealthDetails, HealthKey} from '../health-checks.service';
   templateUrl: './health-detail.component.html',
   styleUrls: ['./health-detail.component.scss']
 })
-export class HealthDetailComponent {
-  health?: { key: HealthKey; value: HealthDetails };
+export class HealthDetailComponent implements OnInit {
+  @Input() health?: { key: HealthKey; value: HealthDetails };
 
   constructor(public activeModal: NgbActiveModal) {
+  }
+
+  ngOnInit() {
+    console.log(this.health);
   }
 
   readableValue(value: any): string {
@@ -29,6 +33,37 @@ export class HealthDetailComponent {
       return JSON.stringify(value);
     } else {
       return value.toString();
+    }
+  }
+
+  getDiskSpaceByKey(key: string): number {
+    if (this.health) {
+      return (this.health.value.details[key] / 1073741824);
+    } else {
+      return 0;
+    }
+  }
+
+
+  getProgressValue(): number {
+    return (100 * this.getDiskSpaceByKey('free')) / this.getDiskSpaceByKey('total');
+  }
+
+  /**
+   * Return type of progress "success", "info", "warning", "danger"
+   */
+  getColorLine(): string {
+    const value = this.getProgressValue();
+    if (value <= 50) {
+      return 'success';
+    } else if (value > 50 && value <= 75) {
+      return 'primary';
+    } else if (value > 70 && value <= 85) {
+      return 'warning';
+    } else if (value > 85) {
+      return 'danger';
+    } else {
+      return 'dark';
     }
   }
 }

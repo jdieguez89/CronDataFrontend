@@ -36,7 +36,8 @@
                         </span>
             </td>
             <td class="text-center">
-              <a class="cursor-pointer" (click)="showHealth(componentHealth)">
+              <a class="cursor-pointer" (click)="showHealth(componentHealth)"
+                 *ngIf="componentHealth.key !== 'ping'">
                 <i class="flaticon-eye"></i>
               </a>
             </td>

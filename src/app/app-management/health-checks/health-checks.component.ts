@@ -39,6 +39,7 @@ export class HealthChecksComponent implements OnInit {
   }
 
   showHealth(health: { key: HealthKey; value: HealthDetails }): void {
-    const modalRef = this.modalService.open(HealthDetailComponent);
+    const modalRef = this.modalService.open(HealthDetailComponent, {centered: true});
+    modalRef.componentInstance.health = health;
   }
 }

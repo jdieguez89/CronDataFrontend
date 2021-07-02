@@ -2,13 +2,13 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs';
 import {PasswordResetInitComponent} from '..';
 import {AccountService} from '../../../../core/auth/account.service';
 import {LoginService} from '../../../../core/login/login.service';
 import {ApplicationService} from '../../../../crondata/cron-applications/shared/services/applications.service';
 import {SysToasrtService} from '../../../alert/sys-toasrt.service';
 import {SysHttpResponseErrorService} from '../../../services/sys-http-response-error.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
