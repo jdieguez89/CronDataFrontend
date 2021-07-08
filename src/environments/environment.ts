@@ -9,9 +9,9 @@ export const environment = {
   SERVER_API_CONTEXT: '',
   // SERVER_API_CONTEXT: 'crondata/',
   BUILD_TIMESTAMP: new Date().getTime(),
-  GRAFANA_URL: 'http://grafana.' + 'crondata.atlasinside.com' + '/',
-  PROMETHEUS_URL: 'http://prometheus.' + 'crondata.atlasinside.com' + '/',
-  FILEBROWSER_URL: 'http://filebrowser.' + 'crondata.atlasinside.com' + '/',
+  GRAFANA_URL: 'http://localhost:3000/',
+  PROMETHEUS_URL: 'http://' + window.location.host + ':7090/',
+  FILEBROWSER_URL: 'http://' + window.location.host + '7081/',
   SESSION_AUTH_TOKEN: window.location.host.split(':')[0].toLocaleUpperCase(),
   DEBUG_INFO_ENABLED: true,
   VERSION: '0.0.1'
