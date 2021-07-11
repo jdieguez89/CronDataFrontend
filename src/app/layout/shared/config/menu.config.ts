@@ -15,7 +15,7 @@ export class MenuConfig {
           authorities: [ADMIN_ROLE, USER_ROLE],
         },
         {
-          title: 'Alert',
+          title: 'Alerts',
           root: true,
           alignment: 'left',
           toggle: 'click',
@@ -120,13 +120,13 @@ export class MenuConfig {
               translate: 'app.management.metrics.title',
               authorities: [ADMIN_ROLE],
             },
-            {
-              page: '/app/crondata/check/logs',
-              icon: 'flaticon-list-2',
-              title: 'Application Logs',
-              translate: 'app.management.metrics.title',
-              authorities: [ADMIN_ROLE],
-            }
+            // {
+            //   page: '/app/crondata/check/logs',
+            //   icon: 'flaticon-list-2',
+            //   title: 'Application Logs',
+            //   translate: 'app.management.metrics.title',
+            //   authorities: [ADMIN_ROLE],
+            // }
           ]
           // }]
         }

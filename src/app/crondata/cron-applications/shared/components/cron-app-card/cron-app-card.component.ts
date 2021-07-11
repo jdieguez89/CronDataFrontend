@@ -49,4 +49,7 @@ export class CronAppCardComponent implements OnInit {
   }
 
 
+  viewDoc(app: ApplicationType) {
+    window.open(app.installationLink, '_blank');
+  }
 }

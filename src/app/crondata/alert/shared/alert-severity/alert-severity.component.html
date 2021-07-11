@@ -1,10 +1,12 @@
-<div class="symbol symbol-20 symbol-light-primary mr-3"
-     [ngClass]="severity === notificationTypeEnum.PAGE?'symbol-primary':
-               severity === notificationTypeEnum.WARNING?'symbol-warning':'symbol-danger'">
-        						<span class="symbol-label">
-        							<span [inlineSVG]="severity === notificationTypeEnum.PAGE?'assets/media/svg/icons/Text/Align-justify.svg':
+<div class="symbol symbol-20 symbol-light-primary d-flex align-items-center justify-content-start">
+  <span [inlineSVG]="severity === notificationTypeEnum.PAGE?'assets/media/svg/icons/Text/Align-justify.svg':
                severity === notificationTypeEnum.WARNING?'assets/media/svg/icons/Code/Info-circle.svg'
                :'assets/media/svg/icons/General/Shield-disabled.svg'"
-                            class="svg-icon svg-icon-medium svg-icon-white p-3"></span>
-                 </span>
+        class="svg-icon svg-icon-medium mr-2"
+        [ngClass]="severity === notificationTypeEnum.PAGE?'svg-icon-info':
+               severity === notificationTypeEnum.WARNING?'svg-icon-warning':'svg-icon-danger'">
+                      </span>
+  <span class="font-size-base font-weight-light"
+    [ngClass]="severity === notificationTypeEnum.PAGE?'text-info':
+               severity === notificationTypeEnum.WARNING?'text-warning':'text-danger'">{{severity}}</span>
 </div>

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NotificationSeverityEnum} from '../../../layout/header/topbar/notification/shared/emun/notification.enum';
+import {NotificationService} from '../../../layout/header/topbar/notification/shared/service/notification.service';
 import {NotificationType} from '../../../layout/header/topbar/notification/shared/type/notification.type';
 import {ITEMS_PER_PAGE} from '../../../shared/constants/pagination.constants';
-import {NotificationSeverityEnum} from '../../../layout/header/topbar/notification/shared/emun/notification.enum';
-import {SortByType} from '../../../shared/types/sort-by.type';
-import {NotificationService} from '../../../layout/header/topbar/notification/shared/service/notification.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {HttpHeaders, HttpResponse} from '@angular/common/http';
 import {SortEvent} from '../../../shared/directives/sortable/type/sort-event';
+import {SortByType} from '../../../shared/types/sort-by.type';
 import {TimeFilterType} from '../../../shared/types/time-filter.type';
 
 @Component({
@@ -14,11 +14,10 @@ import {TimeFilterType} from '../../../shared/types/time-filter.type';
   templateUrl: './alert-history.component.html',
   styleUrls: ['./alert-history.component.scss']
 })
-export class AlertHistoryComponent implements OnInit {
+export class AlertHistoryComponent implements OnInit, OnDestroy {
   alerts?: NotificationType[];
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
-  notificationTypeEnum = NotificationSeverityEnum;
   page = 0;
   request = {
     page: this.page,
@@ -50,6 +49,7 @@ export class AlertHistoryComponent implements OnInit {
   ];
   loading = true;
   severities = [NotificationSeverityEnum.CRITICAL, NotificationSeverityEnum.WARNING, NotificationSeverityEnum.PAGE];
+  interval: any;
 
   constructor(
     private notificationService: NotificationService,
@@ -68,6 +68,7 @@ export class AlertHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlerts();
+    this.interval = setInterval(() => this.getAlerts(), 15000);
   }
 
   onSort($event: SortEvent) {
@@ -77,6 +78,7 @@ export class AlertHistoryComponent implements OnInit {
 
 
   ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   trackId(index: number, item: NotificationType): number {

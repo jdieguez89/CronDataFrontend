@@ -1,6 +1,7 @@
 <div [class]="padding?padding:'p-5'"
      [ngClass]="size && size==='sm'?'table-not-found-sm':'table-not-found'"
      class="d-flex flex-column justify-content-center align-items-center w-100">
-  <i class="icon" [ngClass]="icon?icon:'sys-icon-table'"></i>
+  <span inlineSVG="/assets/icons/charts/table.svg" class="svg svg-icon svg-icon-5x svg-icon-primary"
+  style="fill:rgba(0, 75, 139, 0.3) !important"></span>
   <h6 class="mt-2">No data found</h6>
 </div>

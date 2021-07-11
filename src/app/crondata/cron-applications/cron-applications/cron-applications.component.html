@@ -19,8 +19,13 @@
                [clearable]="true"></ng-select>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="applications && applications.length>0;else isEmpty">
   <div class="col-xl-3" *ngFor="let app of applications">
     <app-cron-app-card [app]="app" (refresh)="getApplications()"></app-cron-app-card>
   </div>
 </div>
+<ng-template #isEmpty>
+  <div class="d-flex w-100 justify-content-center align-items-center" style="min-height: 600px">
+    <app-no-data-found></app-no-data-found>
+  </div>
+</ng-template>
