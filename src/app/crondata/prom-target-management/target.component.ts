@@ -146,7 +146,7 @@ export class TargetComponent implements OnInit, OnDestroy {
   createTarget() {
     const modalCreate = this.modalService.open(TargetUpdateComponent, {centered: true});
     modalCreate.componentInstance.targetUpdated.subscribe(() => {
-      this.getPromTargets();
+      this.getTargets();
     });
   }
 

@@ -1,8 +1,10 @@
 // Angular
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
 import * as objectPath from 'object-path';
 import {Subscription} from 'rxjs';
+import {TokenManagerService} from '../core/auth/token-manager.service';
 import {LayoutConfig} from '../layout/shared/config/layout.config';
 import {MenuConfig} from '../layout/shared/config/menu.config';
 import {PageConfig} from '../layout/shared/config/page.config';
@@ -10,6 +12,7 @@ import {HtmlClassService} from '../layout/shared/services/html-class.service';
 import {LayoutConfigService} from '../layout/shared/services/layout-config.service';
 import {MenuConfigService} from '../layout/shared/services/menu-config.service';
 import {PageConfigService} from '../layout/shared/services/page-config.service';
+import {SESSION_AUTH_TOKEN} from '../shared/constants/global.constant';
 // RxJS
 // Object-Path
 // Layout
@@ -47,7 +50,10 @@ export class SyspenComponent implements OnInit, OnDestroy {
     private menuConfigService: MenuConfigService,
     private pageConfigService: PageConfigService,
     private router: Router,
+    private cookie: CookieService,
+    private tokenManagerService: TokenManagerService,
     private htmlClassService: HtmlClassService) {
+    this.cookie.set(SESSION_AUTH_TOKEN, this.tokenManagerService.getLocalToken())
     // register configs by demos
     this.layoutConfigService.loadConfigs(new LayoutConfig().configs);
     this.menuConfigService.loadConfigs(new MenuConfig().configs);

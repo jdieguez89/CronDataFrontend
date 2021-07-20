@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {CookieService} from 'ngx-cookie-service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {SERVER_API_URL} from '../../app.constants';
+import {SESSION_AUTH_TOKEN} from '../../shared/constants/global.constant';
 import {Login} from '../login/login.model';
 import {TokenManagerService} from './token-manager.service';
-import {CookieService} from 'ngx-cookie-service';
-import {SESSION_AUTH_TOKEN} from '../../shared/constants/global.constant';
 
 type JwtToken = {
   id_token: string;
